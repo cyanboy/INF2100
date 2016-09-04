@@ -15,9 +15,11 @@ public class Scanner {
     private LineNumberReader sourceFile = null;
     private String sourceFileName, sourceLine = "";
 
-    Pattern pattern = Pattern.compile(
-            "(;)|(,)|(\\+)|(-)|(\')|(\\[|\\])|(=)|(\\{|\\})|(/\\*)|(\\.\\.?)|(\\*/?)|(:=?)|(.+)"
+    Pattern old = Pattern.compile(
+            "(;)|(,)|(\\+)|(-)|(\')|(\\[|\\])|(=)|(\\{|\\})|(/\\*)|(\\.\\.?)|(\\*/?)|(:=?)|(\\w+)|(\\p{Punct})"
     );
+
+    Pattern pattern = Pattern.compile("(/\\*)|(\\*/)|(:=)|(\\.\\.)|(>=)|(<>)|(<=)|(\\w+)|(\\p{Punct})");
     Matcher matcher = null;
 
     private int sourcePos = 0;
@@ -62,8 +64,17 @@ public class Scanner {
             matcher = pattern.matcher(sourceLine);
         }
 
-        while (matcher.find()) {
-            System.out.println(matcher.group());
+
+        while (!sourceLine.equals("")) {
+            while (matcher.find()) {
+                System.out.println(matcher.group());
+                if (matcher.hitEnd()) {
+                    readNextLine();
+                    matcher = pattern.matcher(sourceLine);
+                }
+            }
+            readNextLine();
+            matcher = pattern.matcher(sourceLine);
         }
 
         Main.log.noteToken(nextToken);
