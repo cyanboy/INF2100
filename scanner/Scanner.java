@@ -19,7 +19,7 @@ public class Scanner {
             "(;)|(,)|(\\+)|(-)|(\')|(\\[|\\])|(=)|(\\{|\\})|(/\\*)|(\\.\\.?)|(\\*/?)|(:=?)|(\\w+)|(\\p{Punct})"
     );
 
-    Pattern pattern = Pattern.compile("('.+')|(/\\*)|(\\*/)|(:=)|(\\.\\.)|(>=)|(<>)|(<=)|(\\w+)|(\\p{Punct})");
+    Pattern pattern = Pattern.compile("('(?:[^']|\\.)*')|(/\\*)|(\\*/)|(:=)|(\\.\\.)|(>=)|(<>)|(<=)|(\\w+)|(\\p{Punct})");
     Matcher matcher = null;
 
     private int sourcePos = 0;
