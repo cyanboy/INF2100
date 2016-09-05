@@ -15,11 +15,11 @@ public class Scanner {
     private LineNumberReader sourceFile = null;
     private String sourceFileName, sourceLine = "";
 
-    Pattern old = Pattern.compile(
-            "(;)|(,)|(\\+)|(-)|(\')|(\\[|\\])|(=)|(\\{|\\})|(/\\*)|(\\.\\.?)|(\\*/?)|(:=?)|(\\w+)|(\\p{Punct})"
+    /* It's a regex from hell, but it works */
+    Pattern pattern = Pattern.compile(
+            "('(?:[^']|\\.|'')')|(/\\*)|(\\*/)|(:=)|(\\.\\.)|(>=)|(<>)|(<=)|(\\w+)|(\\p{Punct})"
     );
 
-    Pattern pattern = Pattern.compile("('(?:[^']|\\.)*')|(/\\*)|(\\*/)|(:=)|(\\.\\.)|(>=)|(<>)|(<=)|(\\w+)|(\\p{Punct})");
     Matcher matcher = null;
 
     private int sourcePos = 0;
@@ -54,6 +54,47 @@ public class Scanner {
     }
 
 
+    private void skipComment(String commentStart) {
+        String tmp = commentStart;
+        String commentEnd = "";
+
+        if (commentStart.equals("/*")) {
+            commentEnd = "*/";
+        } else if (commentStart.equals("{")) {
+            commentEnd = "}";
+        } else {
+            Main.panic("skipComment only accepts /* or { as argument at line: " + curLineNum());
+            System.exit(1);
+        }
+
+        boolean comment = true;
+
+        while (comment) {
+            while (matcher.find()) {
+                tmp = matcher.group();
+
+                if (tmp.equals(commentEnd)) {
+                    if (!matcher.find()) {
+                        readNextLine();
+                        matcher = pattern.matcher(sourceLine);
+                        matcher.find();
+                    }
+
+                    tmp = matcher.group();
+                    if (!tmp.equals(commentStart)) {
+                        comment = false;
+                        break;
+                    }
+                }
+            }
+            if (comment) {
+                readNextLine();
+                matcher = pattern.matcher(sourceLine);
+            }
+        }
+
+    }
+
     public void readNextToken() {
         curToken = nextToken;
         nextToken = null;
@@ -65,17 +106,45 @@ public class Scanner {
         }
 
 
-        while (!sourceLine.equals("")) {
-            while (matcher.find()) {
-                System.out.println(matcher.group());
-                if (matcher.hitEnd()) {
-                    readNextLine();
-                    matcher = pattern.matcher(sourceLine);
-                }
-            }
+        if (!matcher.find()) {
             readNextLine();
             matcher = pattern.matcher(sourceLine);
+            matcher.find();
         }
+
+        String tmp = matcher.group();
+
+        if (tmp.equals("/*") || tmp.equals("{")) {
+            skipComment(tmp);
+            tmp = matcher.group();
+        }
+
+        if (tmp.startsWith("'") && tmp.endsWith("'")) {
+            if (tmp.length() == 3) { //any other char
+                nextToken = new Token(tmp.charAt(1), getFileLineNum());
+            } else if (tmp.equals("''''")) { // single quote
+                nextToken = new Token("'", getFileLineNum());
+            } else {
+                Main.error(getFileLineNum(), "Illegal char literal");
+            }
+        } else if (tmp.equals(".")){
+            nextToken = new Token(eofToken, curLineNum());
+        } else {
+            TokenKind kind = getTokenKind(tmp);
+            if (kind != null) {
+
+                if (kind == intValToken) {
+                    nextToken = new Token(Integer.parseInt(tmp), getFileLineNum());
+                } else {
+                    nextToken = new Token(kind, getFileLineNum());
+                    nextToken.id = tmp;
+                }
+
+            } else {
+                Main.error(getFileLineNum(), "Illegal token: " + tmp);
+            }
+        }
+
 
         Main.log.noteToken(nextToken);
     }

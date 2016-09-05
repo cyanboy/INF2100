@@ -3,6 +3,10 @@ package scanner;
 // Note that tokens found in standard Pascal but not in Pascal2016
 // have been commented out.
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 public enum TokenKind {
     nameToken("name"),
     intValToken("number"),
@@ -69,6 +73,7 @@ public enum TokenKind {
     eofToken("e-o-f");
 
     private String image;
+    private static Map<String, TokenKind> map;
 
     TokenKind(String im) {
 	image = im;
@@ -76,7 +81,8 @@ public enum TokenKind {
 
 
     public String identify() {
-	return image + " token";
+
+        return this.image + " token";
     }
 
     @Override public String toString() {
@@ -101,5 +107,31 @@ public enum TokenKind {
 
     public boolean isTermOpr() {
 	return isPrefixOpr() || this==orToken;
+    }
+
+    public static TokenKind getTokenKind(String token) {
+        if (map == null) {
+            initializeMap();
+        }
+
+        if (map.containsKey(token)) {
+            return map.get(token);
+        }
+
+        if (Pattern.matches("[a-zA-Z][a-zA-Z0-9]*", token)) {
+            return nameToken;
+        } else if (Pattern.matches("[0-9]+", token)) {
+            return intValToken;
+        }
+
+        return null;
+    }
+
+    private  static void initializeMap() {
+        map = new HashMap<String, TokenKind>();
+
+        for (TokenKind kind: TokenKind.values()) {
+            map.put(kind.valueOf(kind.name()).toString(), TokenKind.valueOf(kind.name()));
+        }
     }
 }
