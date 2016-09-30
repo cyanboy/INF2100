@@ -54,43 +54,33 @@ public class Scanner {
     }
 
 
-    private void skipComment(String commentStart) {
+    private String skipComment(String commentStart) {
         String tmp = commentStart;
         String commentEnd = "";
 
-        if (commentStart.equals("/*")) {
+        if (tmp.equals("/*")) {
             commentEnd = "*/";
-        } else if (commentStart.equals("{")) {
+        } else if (tmp.equals("{")) {
             commentEnd = "}";
         } else {
             Main.panic("skipComment only accepts /* or { as argument at line: " + curLineNum());
             System.exit(1);
         }
 
-        boolean comment = true;
+        while (true) {
 
-        while (comment) {
-            while (matcher.find()) {
+            if (matcher.find()) {
                 tmp = matcher.group();
 
                 if (tmp.equals(commentEnd)) {
-                    if (!matcher.find()) {
-                        readNextLine();
-                        matcher = pattern.matcher(sourceLine);
-                        matcher.find();
-                    }
-
-                    tmp = matcher.group();
-                    if (!tmp.equals(commentStart)) {
-                        comment = false;
-                        break;
-                    }
+                    return tmp;
                 }
-            }
-            if (comment) {
+
+            } else {
                 readNextLine();
                 matcher = pattern.matcher(sourceLine);
             }
+
         }
 
     }
@@ -105,19 +95,28 @@ public class Scanner {
             matcher = pattern.matcher(sourceLine);
         }
 
-
-        if (!matcher.find()) {
+        while (!matcher.find()) {
             readNextLine();
             matcher = pattern.matcher(sourceLine);
-            matcher.find();
         }
 
         String tmp = matcher.group();
 
-        if (tmp.equals("/*") || tmp.equals("{")) {
-            skipComment(tmp);
-            tmp = matcher.group();
+        while (tmp.equals("/*") || tmp.equals("{")) {
+            if (tmp.equals("/*") || tmp.equals("{")) {
+                tmp = skipComment(tmp);
+            }
+
+            while (tmp.equals("*/") || tmp.equals("}")) {
+                if (matcher.find()) {
+                    tmp = matcher.group();
+                } else {
+                    readNextLine();
+                    matcher = pattern.matcher(sourceLine);
+                }
+            }
         }
+
 
         if (tmp.startsWith("'") && tmp.endsWith("'")) {
             if (tmp.length() == 3) { //any other char
@@ -127,7 +126,7 @@ public class Scanner {
             } else {
                 Main.error(getFileLineNum(), "Illegal char literal");
             }
-        } else if (tmp.equals(".")){
+        } else if (tmp.equals(".")) {
             nextToken = new Token(eofToken, curLineNum());
         } else {
             TokenKind kind = getTokenKind(tmp);
