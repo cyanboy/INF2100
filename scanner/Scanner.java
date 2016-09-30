@@ -57,6 +57,7 @@ public class Scanner {
     private String skipComment(String commentStart) {
         String tmp = commentStart;
         String commentEnd = "";
+        int lineNum = getFileLineNum();
 
         if (tmp.equals("/*")) {
             commentEnd = "*/";
@@ -78,6 +79,9 @@ public class Scanner {
 
             } else {
                 readNextLine();
+                if (sourceFile == null) {
+                    Main.error("No ending for comment starting on line " + lineNum);
+                }
                 matcher = pattern.matcher(sourceLine);
             }
 
@@ -124,7 +128,7 @@ public class Scanner {
             } else if (tmp.equals("''''")) { // single quote
                 nextToken = new Token("'", getFileLineNum());
             } else {
-                Main.error(getFileLineNum(), "Illegal char literal");
+                Main.error(getFileLineNum(), "Illegal char literal: " + tmp);
             }
         } else if (tmp.equals(".")) {
             nextToken = new Token(eofToken, curLineNum());

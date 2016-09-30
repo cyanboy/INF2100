@@ -7,4 +7,3 @@ for i in "${files[@]}"
 do
     java -jar $pc -testscanner test/$i;
 done
-
