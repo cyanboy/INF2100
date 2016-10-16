@@ -26,7 +26,7 @@ public abstract class Factor extends PascalSyntax {
                 f = Negation.parse(s);
                 break;
             case intValToken:
-                f = Constant.parse(s);
+                f = UnsignedConstant.parse(s);
                 break;
             case leftParToken:
                 f = InnerExpression.parse(s);

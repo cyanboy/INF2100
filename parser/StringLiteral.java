@@ -7,7 +7,7 @@ import scanner.TokenKind;
 /**
  * Created by cyanboy on 20/10/15.
  */
-public class StringLiteral extends Constant {
+public class StringLiteral extends UnsignedConstant {
     public StringLiteral(int lNum) {
         super(lNum);
     }

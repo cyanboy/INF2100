@@ -38,4 +38,9 @@ public class ParamDeclList extends PascalSyntax {
     public String identify() {
         return null;
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

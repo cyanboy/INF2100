@@ -18,17 +18,17 @@ public class AssignStatement extends Statement {
     public static AssignStatement parse(Scanner s) {
         enterParser("assign-statement");
         AssignStatement a = new AssignStatement(s.curLineNum());
+
         a.var = Variable.parse(s);
         s.skip(TokenKind.assignToken);
         a.exp = Expression.parse(s);
+
         leaveParser("assign-statement");
         return a;
     }
 
     @Override
-    public void check(Block curScope, Library library) {
-        var.decl = curScope.findDecl(var.name, this);
-    }
+    public void check(Block curScope, Library library) {}
 
     @Override
     public void genCode(CodeFile codeFile) {
@@ -44,5 +44,10 @@ public class AssignStatement extends Statement {
     @Override
     public String identify() {
         return null;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

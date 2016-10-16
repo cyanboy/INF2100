@@ -15,18 +15,18 @@ public class TypeName extends Type {
 
     static TypeName parse(Scanner s) {
         enterParser("type-name");
-        TypeName t = new TypeName(s.curLineNum());
 
-        s.test(TokenKind.nameToken);
+        TypeName t = new TypeName(s.curLineNum());
         t.name = s.curToken.id;
-        s.readNextToken();
+        s.skip(TokenKind.nameToken);
 
         leaveParser("type-name");
         return t;
     }
 
+    @Override
     void check(Block curScope, Library library) {
-        curScope.findDecl(name, this);
+
     }
 
     @Override

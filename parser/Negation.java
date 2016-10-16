@@ -13,6 +13,11 @@ public class Negation extends Factor {
         return super.identify();
     }
 
+    @Override
+    void prettyPrint() {
+
+    }
+
     Factor factor;
 
     public Negation(int n) {

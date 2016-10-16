@@ -56,27 +56,13 @@ public class ProcDecl extends PascalDecl {
         return p;
     }
 
-    public void codeGen(CodeFile codeFile) {
-        codeFile.genInstr("proc$" + name + "_" + declLevel, "enter",
-                "$" + (32+(declList.parameters.size()*4)) + "$" + declLevel, "");
-
-        block.declLevel = this.declLevel;
-        block.genCode(codeFile);
-
-        codeFile.genInstr("", "ret", "", "");
-        codeFile.genInstr("", "leave", "", "");
-    }
-
-    void check(Block curScope, Library library) {
-        block.outerScope = curScope;
-        for (ParamDecl pd : declList.parameters) {
-            block.addDecl(pd.name, pd);
-        }
-        block.check(block, library);
-    }
-
     @Override
     public String identify() {
         return "<proc-decl> at line " + lineNum;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

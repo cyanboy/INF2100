@@ -1,6 +1,5 @@
 package parser;
 
-import main.CodeFile;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -33,15 +32,13 @@ public class StatementList extends PascalSyntax {
         return sl;
     }
 
-
-    public void genCode(CodeFile codeFile) {
-        for (Statement statement : statements) {
-            statement.genCode(codeFile);
-        }
-    }
-
     @Override
     public String identify() {
         return null;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

@@ -1,6 +1,7 @@
 package parser;
 
 import scanner.Scanner;
+import scanner.Token;
 import scanner.TokenKind;
 
 /**
@@ -12,26 +13,33 @@ public class ArrayType extends Type {
     }
 
     Type type;
-    Type ofType;
+    Constant a, b;
 
     static ArrayType parse(Scanner s) {
         enterParser("array-type");
-        ArrayType a = new ArrayType(s.curLineNum());
+        ArrayType at = new ArrayType(s.curLineNum());
+
         s.skip(TokenKind.arrayToken);
         s.skip(TokenKind.leftBracketToken);
-        a.type = Type.parse(s);
+
+        at.a = Constant.parse(s);
+
+        s.skip(TokenKind.dotToken);
+
+        at.b = Constant.parse(s);
+
+
         s.skip(TokenKind.rightBracketToken);
         s.skip(TokenKind.ofToken);
-        a.ofType = Type.parse(s);
+        at.type = Type.parse(s);
 
         leaveParser("array-type");
-        return a;
+        return at;
     }
 
     @Override
     void check(Block curScope, Library library) {
-        type.check(curScope, library);
-        ofType.check(curScope, library);
+
     }
 
     @Override

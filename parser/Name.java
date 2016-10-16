@@ -1,17 +1,23 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
 /**
  * Created by cyanboy on 03/11/15.
  */
-public class Name extends Constant {
+public class Name extends UnsignedConstant {
     String name;
 
     public Name(int lNum) {
         super(lNum);
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrint(name);
     }
 
     static Name parse(Scanner s) {

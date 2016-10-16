@@ -13,6 +13,11 @@ public class InnerExpression extends Factor {
         return super.identify();
     }
 
+    @Override
+    void prettyPrint() {
+
+    }
+
     public InnerExpression(int n) {
         super(n);
     }

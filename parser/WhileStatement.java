@@ -11,7 +11,6 @@ public class WhileStatement extends Statement {
     Expression expr;
     Statement body;
 
-
     WhileStatement(int lNum) {
         super(lNum);
     }
@@ -19,6 +18,11 @@ public class WhileStatement extends Statement {
     @Override
     public String identify() {
         return null;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 
     public static WhileStatement parse(Scanner s) {
@@ -37,25 +41,8 @@ public class WhileStatement extends Statement {
     }
 
     public void genCode(CodeFile codeFile) {
-        String endLabel = codeFile.getLocalLabel();
-        String testLabel = codeFile.getLocalLabel();
-
-        codeFile.genInstr(testLabel, "", "", "Start while-statement");
-
-        expr.genCode(codeFile);
-
-        codeFile.genInstr("", "cmpl", "$0, %eax", "");
-        codeFile.genInstr("", "je", endLabel, "");
-
-        body.genCode(codeFile);
-
-        codeFile.genInstr("", "jmp", testLabel, "");
-        codeFile.genInstr(endLabel, "", "", "End while-statement");
-
     }
 
     public void check(Block curScope, Library library) {
-        expr.check(curScope, library);
-        body.check(curScope, library);
     }
 }

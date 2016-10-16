@@ -23,6 +23,11 @@ public class VarDecl extends PascalDecl {
     }
 
     @Override
+    void prettyPrint() {
+
+    }
+
+    @Override
     void checkWhetherProcedure(PascalSyntax where) {
 
     }

@@ -42,4 +42,9 @@ public class CompoundStatement extends Statement {
     public String identify() {
         return null;
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

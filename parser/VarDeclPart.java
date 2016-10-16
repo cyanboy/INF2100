@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -34,6 +35,12 @@ public class VarDeclPart extends PascalSyntax {
 
     @Override
     public String identify() {
-        return null;
+        return "<var-decl-part> at line " + lineNum;
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrint("var ");
+        variables.forEach(VarDecl::prettyPrint);
     }
 }

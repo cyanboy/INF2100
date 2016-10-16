@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class ConstDeclPart extends PascalSyntax {
     public ConstDeclPart(int n) {
         super(n);
-        constants = new ArrayList<ConstDecl>();
+        constants = new ArrayList<>();
     }
 
     List<ConstDecl> constants;
@@ -29,12 +30,14 @@ public class ConstDeclPart extends PascalSyntax {
         return c;
     }
 
-    public void check(Block curScope, Library library) {
-
+    @Override
+    public String identify() {
+        return "<const-decl-part> at line " + lineNum;
     }
 
     @Override
-    public String identify() {
-        return null;
+    void prettyPrint() {
+        Main.log.prettyPrint("const ");
+        constants.forEach(ConstDecl::prettyPrint);
     }
 }

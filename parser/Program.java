@@ -1,6 +1,6 @@
 package parser;
 
-import main.CodeFile;
+import main.Main;
 import scanner.TokenKind;
 import scanner.Scanner;
 
@@ -58,41 +58,17 @@ public class Program extends PascalDecl {
     }
 
 
-    public void check(Block curScope, Library library) {
-        progBlock.check(curScope, library);
-    }
-
-
-    public void genCode(CodeFile codeFile) {
-        this.declLevel = 1;
-
-        codeFile.genInstr("", ".globl", "_main", "");
-        codeFile.genInstr("", ".globl", "main", "");
-        codeFile.genInstr("_main", "", "", "");
-        codeFile.genInstr("main", "call", "prog$" + this.name + "_"  + this.declLevel, "");
-        codeFile.genInstr("", "movl", "$0,%eax", "");
-        codeFile.genInstr("", "ret", "", "");
-
-
-        progBlock.genCode(codeFile);
-
-        codeFile.genInstr("prog$" + name + "_"  + declLevel,
-                "enter", "$" + (32 + (progBlock.varDeclPart.variables.size() * 4)) + ",$1",
-                "");
-
-        progBlock.statementList.genCode(codeFile);
-
-        codeFile.genInstr("", "leave", "", "");
-        codeFile.genInstr("", "ret", "", "");
-
-    }
-
     public void prettyPrint() {
-
+        Main.log.prettyPrint("program");
+        Main.log.prettyPrintLn(" " + this.name + ";");
+        Main.log.prettyIndent();
+        progBlock.prettyPrint();
+        Main.log.prettyOutdent();
+        Main.log.prettyPrint(".");
     }
 
     @Override
     public String identify() {
-        return "";
+        return "<program> on line " + lineNum;
     }
 }

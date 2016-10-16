@@ -11,16 +11,16 @@ public class RangeType extends Type {
         super(n);
     }
 
-    Constant from;
-    Constant to;
+    UnsignedConstant from;
+    UnsignedConstant to;
 
     static RangeType parse(Scanner s) {
         enterParser("range-type");
         RangeType r = new RangeType(s.curLineNum());
 
-        r.from = Constant.parse(s);
+        r.from = UnsignedConstant.parse(s);
         s.skip(TokenKind.rangeToken);
-        r.to = Constant.parse(s);
+        r.to = UnsignedConstant.parse(s);
 
         leaveParser("range-type");
         return r;

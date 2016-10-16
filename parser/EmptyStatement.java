@@ -31,4 +31,9 @@ public class EmptyStatement extends Statement {
     public String identify() {
         return null;
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

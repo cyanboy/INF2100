@@ -27,4 +27,9 @@ public class TermOpr extends Operator {
     public String identify() {
         return super.identify();
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

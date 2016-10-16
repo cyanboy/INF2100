@@ -8,56 +8,58 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by cyanboy on 21/10/15.
+ * Created by cyanboy on 16/10/15.
  */
-public class FuncCall extends Factor {
-    public FuncCall(int n) {
-        super(n);
-    }
-
-    @Override
-    public String identify() {
-        return super.identify();
-    }
-
-    @Override
-    void prettyPrint() {
-
+public class ProcCall extends Statement {
+    public ProcCall(int lNum) {
+        super(lNum);
     }
 
     String name;
     List<Expression> expressions = new ArrayList<>();
     PascalDecl decl;
 
-    static FuncCall parse(Scanner s) {
-        enterParser("func-call");
-        FuncCall f = new FuncCall(s.curLineNum());
+    public static ProcCall parse(Scanner s) {
+        enterParser("proc-call-statement");
 
-        f.name = s.curToken.id;
+        ProcCall p = new ProcCall(s.curLineNum());
+        p.name = s.curToken.id;
         s.skip(TokenKind.nameToken);
 
         if (s.curToken.kind == TokenKind.leftParToken) {
 
             s.skip(TokenKind.leftParToken);
-            f.expressions.add(Expression.parse(s));
+            p.expressions.add(Expression.parse(s));
 
             while (s.curToken.kind == TokenKind.commaToken) {
                 s.skip(TokenKind.commaToken);
-                f.expressions.add(Expression.parse(s));
+                p.expressions.add(Expression.parse(s));
             }
 
             s.skip(TokenKind.rightParToken);
         }
 
-        leaveParser("func-call");
-        return f;
+        leaveParser("proc-call-statement");
+        return p;
     }
 
     @Override
     public void genCode(CodeFile codeFile) {
+
     }
 
     @Override
     public void check(Block curScope, Library library) {
+
+    }
+
+    @Override
+    public String identify() {
+        return null;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

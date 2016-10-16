@@ -41,37 +41,9 @@ public class SimpleExpression extends Expression {
 
     @Override
     void check(Block curScope, Library library) {
-        for (Term t : term) {
-            t.check(curScope, library);
-        }
     }
 
     public void genCode(CodeFile codeFile) {
-        if (prefixOpr != null && prefixOpr.op == TokenKind.subtractToken) {
-            codeFile.genInstr("", "negl", "%eax", "");
-        }
-
-
-        for (int i = 1; i < term.size() - 1; i++) {
-            term.get(i).genCode(codeFile);
-
-            if (!termOpr.isEmpty()) {
-                TermOpr op = termOpr.get(i + 1);
-                codeFile.genInstr("", "pushl", "%eax", "");
-                term.get(i + 1).genCode(codeFile);
-                codeFile.genInstr("", "movl", "%eax,%ecx", "");
-                codeFile.genInstr("", "popl", "%eax", "");
-
-                if (op.op == TokenKind.addToken) {
-                    codeFile.genInstr("", "addl", "%ecx,%eax", "");
-                } else if (op.op == TokenKind.subtractToken) {
-                    codeFile.genInstr("", "subl", "%ecx,%eax", "");
-                } else if (op.op == TokenKind.orToken) {
-                    codeFile.genInstr("", "orl", "%ecx,%eax", "");
-                }
-            }
-        }
-
 
     }
 

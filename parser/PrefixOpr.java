@@ -30,4 +30,9 @@ public class PrefixOpr extends Operator {
     public String identify() {
         return null;
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

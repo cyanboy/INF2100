@@ -1,13 +1,14 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
 /**
  * Created by cyanboy on 20/10/15.
  */
-public class NumericLiteral extends Constant {
+public class NumericLiteral extends UnsignedConstant {
     NumericLiteral(int lNum) {
         super(lNum);
     }
@@ -39,5 +40,10 @@ public class NumericLiteral extends Constant {
     @Override
     public String identify() {
         return super.identify();
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrint(Integer.toString(val));
     }
 }

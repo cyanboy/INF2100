@@ -11,6 +11,8 @@ public class ParamDecl extends PascalDecl {
         super(id, lNum);
     }
 
+    TypeName tn;
+
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
 
@@ -43,7 +45,7 @@ public class ParamDecl extends PascalDecl {
 
         s.skip(TokenKind.colonToken);
 
-        TypeName.parse(s);
+        p.tn = TypeName.parse(s);
 
 
         leaveParser("param-decl");
@@ -54,5 +56,10 @@ public class ParamDecl extends PascalDecl {
     @Override
     public String identify() {
         return "<parm-decl> at line " + lineNum;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

@@ -20,38 +20,12 @@ public class Block extends PascalSyntax {
 
     Program context;
     ConstDeclPart constDeclPart;
-    TypeDeclPart typeDeclPart;
     VarDeclPart varDeclPart;
 
     StatementList statementList;
 
     List<FuncDecl> funcDeclList = new ArrayList<>();
     List<ProcDecl> procDeclList = new ArrayList<>();
-
-    public void genCode(CodeFile codeFile) {
-        int off = 32;
-
-        if (varDeclPart != null) {
-            for (VarDecl v : varDeclPart.variables) {
-                v.declLevel = declLevel;
-                off += 4;
-                v.declOffset = off;
-            }
-        }
-
-
-        if (!funcDeclList.isEmpty()) {
-            for (FuncDecl fun : funcDeclList) {
-
-                fun.genCode(codeFile);
-            }
-        }
-        if (!procDeclList.isEmpty()) {
-            for (ProcDecl proc : procDeclList) {
-                proc.codeGen(codeFile);
-            }
-        }
-    }
 
     public static Block parse(Scanner s) {
         enterParser("block");
@@ -88,68 +62,27 @@ public class Block extends PascalSyntax {
         super(n);
     }
 
-
-    void addDecl(String id, PascalDecl d) {
-        if (decls.containsKey(id))
-            d.error(id + " declared twice in same block!");
-        decls.put(id, d);
+    public String identify() {
+        return "<block> on line " + lineNum;
     }
 
-    void check(Block curScope, Library lib) {
+    public void prettyPrint() {
         if (constDeclPart != null) {
-            for (ConstDecl cd : constDeclPart.constants) {
-                addDecl(cd.name, cd);
-            }
+            constDeclPart.prettyPrint();
         }
-
-        if (typeDeclPart != null) {
-            for (TypeDecl td : typeDeclPart.typeDecls) {
-                addDecl(td.name, td);
-            }
-        }
-
 
         if (varDeclPart != null) {
-            for (VarDecl vd : varDeclPart.variables) {
-                vd.check(curScope,lib);
-                addDecl(vd.name, vd);
-            }
+            varDeclPart.prettyPrint();
         }
 
-        int lvl = declLevel;
-        for (FuncDecl fd : funcDeclList) {
-            addDecl(fd.name, fd);
-            fd.declLevel = ++lvl;
-            fd.check(curScope, lib);
+        procDeclList.forEach(ProcDecl::prettyPrint);
+        funcDeclList.forEach(FuncDecl::prettyPrint);
 
-        }
-
-        for (ProcDecl pd : procDeclList) {
-            addDecl(pd.name, pd);
-            pd.declLevel = ++lvl;
-            pd.check(curScope, lib);
-        }
-
-        if (statementList != null) {
-            for (Statement st : statementList.statements) {
-                st.check(curScope, lib);
-            }
-        }
-    }
-
-    PascalDecl findDecl(String id, PascalSyntax where) {
-        PascalDecl d = decls.get(id);
-        if (d != null) {
-            Main.log.noteBinding(id, where, d);
-            return d; }
-        if (outerScope != null)
-            return outerScope.findDecl(id,where);
-        where.error("Name " + id + " is unknown!");
-        return null;  // Required by the Java compiler.
-    }
-
-    public String identify() {
-        return "";
+        Main.log.prettyPrintLn("begin");
+        Main.log.prettyIndent();
+        statementList.prettyPrint();
+        Main.log.prettyOutdent();
+        Main.log.prettyPrint("end");
     }
 
 }

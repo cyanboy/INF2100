@@ -49,4 +49,9 @@ public class Term extends PascalSyntax {
     public String identify() {
         return null;
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

@@ -31,31 +31,23 @@ public class Variable extends Factor {
             v.expr = Expression.parse(s);
             s.skip(TokenKind.rightBracketToken);
         }
+
         leaveParser("variable");
         return v;
     }
 
     @Override
     public void genCode(CodeFile codeFile) {
-        if (decl instanceof VarDecl) {
-            codeFile.genInstr("", "movl", (-4*decl.declLevel) + "(%ebp),%edx", "");
-            codeFile.genInstr("", "movl", -decl.declOffset + "(%edx),%eax", "");
-        } else if (decl instanceof ConstDecl) {
-            Constant c = ((ConstDecl) decl).constant;
-            if (c instanceof NumericLiteral) {
-                codeFile.genInstr("", "movl", "$" + ((NumericLiteral) c).val + ",%eax", "");
-            } else if (c instanceof  CharLiteral) {
-                codeFile.genInstr("", "movl", "$" + ((CharLiteral) c).constant + ",%eax", "");
-            }
-        }
+
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 
     public void check(Block curScope, Library lib) {
-        this.decl = curScope.findDecl(name, this);
 
-        if (expr != null) {
-            expr.check(curScope, lib);
-        }
     }
 
     @Override

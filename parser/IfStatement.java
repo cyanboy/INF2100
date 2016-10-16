@@ -37,45 +37,21 @@ public class IfStatement extends Statement {
 
     @Override
     public void genCode(CodeFile codeFile) {
-        String lab1 = codeFile.getLocalLabel();
-        String lab2 = null;
-
-        exp.genCode(codeFile);
-
-        codeFile.genInstr("", "cmpl", "$0, %eax","");
-        codeFile.genInstr("", "je", lab1, "");
-        body0.genCode(codeFile);
-
-        if (body1 != null) {
-            lab2 = codeFile.getLocalLabel();
-            codeFile.genInstr("", "jmp", lab2, "");
-        }
-
-        codeFile.genInstr(lab1, "", "", "");
-        body1.genCode(codeFile);
-
-        if (lab2 != null) {
-            codeFile.genInstr(lab2, "", "", "");
-        }
 
     }
 
     @Override
     public void check(Block curScope, Library library) {
-        exp.check(curScope, library);
 
-
-        if (body0 != null) {
-            body0.check(curScope, library);
-        }
-
-        if (body1 != null) {
-            body1.check(curScope, library);
-        }
     }
 
     @Override
     public String identify() {
         return null;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

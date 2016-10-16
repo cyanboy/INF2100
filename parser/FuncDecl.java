@@ -55,30 +55,17 @@ public class FuncDecl extends PascalDecl {
         return f;
     }
 
-    public void genCode(CodeFile codeFile) {
-        codeFile.genInstr("func$" + name + "_" + declLevel, "enter",
-                "$" + (32+(declList.parameters.size()*4)) + ",$" + declLevel, "");
-
-        body.declLevel = this.declLevel;
-        body.genCode(codeFile);
-
-        codeFile.genInstr("", "movl", "-32(%ebp),%eax", "");
-        codeFile.genInstr("", "ret", "", "");
-        codeFile.genInstr("", "leave", "", "");
-    }
 
     void check(Block curScope, Library library) {
-        body.outerScope = curScope;
-
-        for (ParamDecl pd : declList.parameters) {
-            body.addDecl(pd.name, pd);
-        }
-
-        body.check(body, library);
     }
 
     @Override
     public String identify() {
         return "<func-decl> at line" + lineNum;
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

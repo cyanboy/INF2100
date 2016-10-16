@@ -27,4 +27,9 @@ public class FactorOpr extends Operator {
     public String identify() {
         return super.identify();
     }
+
+    @Override
+    void prettyPrint() {
+
+    }
 }

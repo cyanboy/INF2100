@@ -1,41 +1,43 @@
 package parser;
 
-import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
+
 /**
- * Created by cyanboy on 20/10/15.
+ * Created by cyanboy on 16/10/2016.
  */
-abstract class Constant extends Factor {
+public class Constant extends PascalSyntax {
+
+    PrefixOpr prefixOpr;
+    UnsignedConstant uc;
+
+
     Constant(int lNum) {
         super(lNum);
     }
 
-    static Constant parse(Scanner s) {
-        Constant c = null;
+    @Override
+    public String identify() {
+        return "<constant> at line  " + lineNum;
+    }
 
+    public static Constant parse(Scanner s) {
+        Constant c = new Constant(s.curLineNum());
         enterParser("constant");
 
-        if(s.curToken.kind == TokenKind.nameToken){
-            c = Name.parse(s);
-        }else if(s.curToken.kind == TokenKind.intValToken){
-            c = NumericLiteral.parse(s);
-        } else if (s.curToken.kind == TokenKind.charValToken) {
-            c = CharLiteral.parse(s);
-        }else{
-            Main.error("Error with Constant. Found a " + s.curToken.kind.toString() + " token with a " + s.nextToken.kind.toString() + " after it");
+        if (s.curToken.kind.isPrefixOpr()) {
+            c.prefixOpr = PrefixOpr.parse(s);
         }
 
-        leaveParser("constant");
+        c.uc = UnsignedConstant.parse(s);
 
+        leaveParser("constant");
         return c;
     }
 
-    abstract public void check(Block curScope, Library library);
-
     @Override
-    public String identify() {
-        return super.identify();
+    void prettyPrint() {
+
     }
 }

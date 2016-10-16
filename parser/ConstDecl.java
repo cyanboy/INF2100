@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -52,5 +53,12 @@ public class ConstDecl extends PascalDecl {
     @Override
     public String identify() {
         return "<const-decl> on line " + lineNum;
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrintLn(this.name + " = ");
+        constant.prettyPrint();
+        Main.log.prettyPrint(";");
     }
 }
