@@ -39,20 +39,15 @@ public class Program extends PascalDecl {
         enterParser("program");
 
         s.skip(TokenKind.programToken);
-
-        s.test(TokenKind.nameToken);
-
         Program p = new Program(s.curToken.id, s.curLineNum());
+        p.name = s.curToken.id;
 
-        s.readNextToken();
-
+        s.skip(TokenKind.nameToken);
         s.skip(TokenKind.semicolonToken);
 
         p.progBlock = Block.parse(s);
 
-        p.progBlock.context = p;
-
-        s.skip(TokenKind.eofToken);
+        s.skip(TokenKind.dotToken);
         leaveParser("program");
         return p;
     }

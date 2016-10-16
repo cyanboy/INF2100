@@ -19,9 +19,8 @@ public class Variable extends Factor {
 
     public static Variable parse(Scanner s) {
         enterParser("variable");
-        Variable v = new Variable(s.curLineNum());
 
-        s.test(TokenKind.nameToken);
+        Variable v = new Variable(s.curLineNum());
         v.name = s.curToken.id;
 
         s.skip(TokenKind.nameToken);

@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -33,10 +34,16 @@ abstract class UnsignedConstant extends Factor {
         return uc;
     }
 
-    abstract public void check(Block curScope, Library library);
+
+    public void check(Block curScope, Library library) {}
 
     @Override
     public String identify() {
-        return super.identify();
+        return "";
+    }
+
+    @Override
+    void prettyPrint() {
+
     }
 }

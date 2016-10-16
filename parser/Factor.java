@@ -22,15 +22,6 @@ public abstract class Factor extends PascalSyntax {
         Factor f = null;
 
         switch (s.curToken.kind) {
-            case notToken:
-                f = Negation.parse(s);
-                break;
-            case intValToken:
-                f = UnsignedConstant.parse(s);
-                break;
-            case leftParToken:
-                f = InnerExpression.parse(s);
-                break;
             case nameToken:
                 switch (s.nextToken.kind) {
                     case leftParToken:
@@ -43,6 +34,16 @@ public abstract class Factor extends PascalSyntax {
                         f = Variable.parse(s);
                         break;
                 }
+                break;
+            case notToken:
+                f = Negation.parse(s);
+                break;
+            case intValToken:
+            case charValToken:
+                f = UnsignedConstant.parse(s);
+                break;
+            case leftParToken:
+                f = InnerExpression.parse(s);
                 break;
             default:
                 Main.error(s.curLineNum() + ": Expected factor, got " + s.curToken.id);

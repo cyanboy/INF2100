@@ -102,6 +102,12 @@ public class Scanner {
         while (!matcher.find()) {
             readNextLine();
             matcher = pattern.matcher(sourceLine);
+
+            if (sourceFile == null) {
+                nextToken = new Token(eofToken, getFileLineNum());
+                Main.log.noteToken(nextToken);
+                return;
+            }
         }
 
         String tmp = matcher.group();
@@ -131,7 +137,7 @@ public class Scanner {
                 Main.error(getFileLineNum(), "Illegal char literal: " + tmp);
             }
         } else if (tmp.equals(".")) {
-            nextToken = new Token(eofToken, curLineNum());
+            nextToken = new Token(dotToken, curLineNum());
         } else {
             TokenKind kind = getTokenKind(tmp);
             if (kind != null) {

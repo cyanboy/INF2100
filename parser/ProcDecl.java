@@ -38,7 +38,7 @@ public class ProcDecl extends PascalDecl {
 
     static ProcDecl parse(Scanner s) {
         enterParser("proc-decl");
-        ProcDecl p = null;
+        ProcDecl p = new ProcDecl(s.curToken.id, s.curLineNum());
         s.skip(TokenKind.procedureToken);
         s.test(TokenKind.nameToken);
         p.name = s.curToken.id;

@@ -107,7 +107,7 @@ public class Main {
         if (s.curToken.kind != eofToken)
             error("Scanner error: Garbage after the program!");
 
-        prog.prettyPrint();
+        //prog.prettyPrint();
     }
 
 

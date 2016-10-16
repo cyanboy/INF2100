@@ -33,16 +33,9 @@ public class Term extends PascalSyntax {
     }
 
     void check(Block curScope, Library library) {
-        for (Factor f : factors) {
-            f.check(curScope, library);
-        }
     }
 
     public void genCode(CodeFile codeFile) {
-        for (int i = 0; i < factors.size(); i++) {
-            Factor f = factors.get(i);
-            f.genCode(codeFile);
-        }
     }
 
     @Override

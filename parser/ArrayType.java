@@ -24,7 +24,7 @@ public class ArrayType extends Type {
 
         at.a = Constant.parse(s);
 
-        s.skip(TokenKind.dotToken);
+        s.skip(TokenKind.rangeToken);
 
         at.b = Constant.parse(s);
 
