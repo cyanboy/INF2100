@@ -1,11 +1,12 @@
 package main;
 
-import parser.*;
+import parser.Program;
 import scanner.Scanner;
 
-import static scanner.TokenKind.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
-import java.io.*;
+import static scanner.TokenKind.eofToken;
 
 public class Main {
     public static final String version = "2016-08-22";
@@ -32,9 +33,9 @@ public class Main {
             Scanner s = new Scanner(sourceFileName);
             if (testScanner)
                 doTestScanner(s);
-            // Del 2:
-            // else if (testParser)
-            //     doTestParser(s);
+                // Del 2:
+            else if (testParser)
+                doTestParser(s);
             // Del 3:
             // else if (testChecker)
             //     doTestChecker(s);
@@ -101,15 +102,14 @@ public class Main {
     }
 
 
-    /* Del 2:
     private static void doTestParser(Scanner s) {
-	Program prog = Program.parse(s);
-	if (s.curToken.kind != eofToken) 
-	    error("Scanner error: Garbage after the program!");
+        Program prog = Program.parse(s);
+        if (s.curToken.kind != eofToken)
+            error("Scanner error: Garbage after the program!");
 
-	prog.prettyPrint();
+        prog.prettyPrint();
     }
-    */
+
 
 
     /* Del 3:
