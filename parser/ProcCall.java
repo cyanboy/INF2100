@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -20,7 +21,7 @@ public class ProcCall extends Statement {
     PascalDecl decl;
 
     public static ProcCall parse(Scanner s) {
-        enterParser("proc-call-statement");
+        enterParser("proc call");
 
         ProcCall p = new ProcCall(s.curLineNum());
         p.name = s.curToken.id;
@@ -39,7 +40,7 @@ public class ProcCall extends Statement {
             s.skip(TokenKind.rightParToken);
         }
 
-        leaveParser("proc-call-statement");
+        leaveParser("proc call");
         return p;
     }
 
@@ -60,6 +61,14 @@ public class ProcCall extends Statement {
 
     @Override
     void prettyPrint() {
+        Main.log.prettyPrint(name);
+        Main.log.prettyPrint("(");
 
+        expressions.forEach(e -> {
+            e.prettyPrint();
+            Main.log.prettyPrint(",");
+        });
+
+        Main.log.prettyPrint(")");
     }
 }

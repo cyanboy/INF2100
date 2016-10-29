@@ -59,6 +59,6 @@ public class ConstDecl extends PascalDecl {
     void prettyPrint() {
         Main.log.prettyPrintLn(this.name + " = ");
         constant.prettyPrint();
-        Main.log.prettyPrint(";");
+        Main.log.prettyPrintLn(";");
     }
 }

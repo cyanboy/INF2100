@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -14,13 +15,13 @@ public class TypeName extends Type {
     String name;
 
     static TypeName parse(Scanner s) {
-        enterParser("type-name");
+        enterParser("type name");
 
         TypeName t = new TypeName(s.curLineNum());
         t.name = s.curToken.id;
         s.skip(TokenKind.nameToken);
 
-        leaveParser("type-name");
+        leaveParser("type name");
         return t;
     }
 
@@ -32,5 +33,10 @@ public class TypeName extends Type {
     @Override
     public String identify() {
         return super.identify();
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrint(name);
     }
 }

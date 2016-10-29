@@ -45,6 +45,15 @@ public class Term extends PascalSyntax {
 
     @Override
     void prettyPrint() {
+        factors.get(0).prettyPrint();
 
+        if(!factorOprs.isEmpty()){
+
+            for(int i = 0; i < factorOprs.size(); i++) {
+                factorOprs.get(i).prettyPrint();
+                factors.get(i+1).prettyPrint();
+            }
+
+        }
     }
 }

@@ -114,6 +114,8 @@ public enum TokenKind {
             initializeMap();
         }
 
+        // The char and number part is a edge case. Since I am just iterating
+        // over the content of the
         if (map.containsKey(token)) {
             return map.get(token);
         }
@@ -128,9 +130,11 @@ public enum TokenKind {
     }
 
     private  static void initializeMap() {
-        map = new HashMap<String, TokenKind>();
+        map = new HashMap<>();
 
         for (TokenKind kind: TokenKind.values()) {
+            if (kind == charValToken || kind == intValToken)
+                continue;
             map.put(kind.valueOf(kind.name()).toString(), TokenKind.valueOf(kind.name()));
         }
     }

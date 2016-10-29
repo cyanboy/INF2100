@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -15,7 +16,8 @@ public class Negation extends Factor {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint("not ");
+        factor.prettyPrint();
     }
 
     Factor factor;

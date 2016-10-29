@@ -33,6 +33,6 @@ public class PrefixOpr extends Operator {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint(op.toString());
     }
 }

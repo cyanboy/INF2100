@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -11,7 +12,7 @@ public class ParamDecl extends PascalDecl {
         super(id, lNum);
     }
 
-    TypeName tn;
+    TypeName typeName;
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
@@ -45,7 +46,7 @@ public class ParamDecl extends PascalDecl {
 
         s.skip(TokenKind.colonToken);
 
-        p.tn = TypeName.parse(s);
+        p.typeName = TypeName.parse(s);
 
 
         leaveParser("param-decl");
@@ -60,6 +61,7 @@ public class ParamDecl extends PascalDecl {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint(name + " : ");
+        typeName.prettyPrint();
     }
 }

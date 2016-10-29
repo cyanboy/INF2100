@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -14,14 +15,14 @@ public class CompoundStatement extends Statement {
     StatementList statements;
 
     public static CompoundStatement parse(Scanner s) {
-        enterParser("compound-statement");
+        enterParser("compound statm");
         CompoundStatement c = new CompoundStatement(s.curLineNum());
 
         s.skip(TokenKind.beginToken);
         c.statements = StatementList.parse(s);
         s.skip(TokenKind.endToken);
 
-        leaveParser("compound-statement");
+        leaveParser("compound statm");
         return c;
     }
 
@@ -44,7 +45,11 @@ public class CompoundStatement extends Statement {
     }
 
     @Override
-    void prettyPrint() {
 
+    void prettyPrint() {
+        Main.log.prettyPrintLn("begin");
+        statements.prettyPrint();
+        Main.log.prettyOutdent();
+        Main.log.prettyPrintLn("end");
     }
 }

@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -22,11 +23,14 @@ public class WhileStatement extends Statement {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint("while ");
+        expr.prettyPrint();
+        Main.log.prettyPrintLn("do");
+        body.prettyPrint();
     }
 
     public static WhileStatement parse(Scanner s) {
-        enterParser("while-statement");
+        enterParser("while statm");
 
         s.skip(TokenKind.whileToken);
 
@@ -36,7 +40,7 @@ public class WhileStatement extends Statement {
         s.skip(TokenKind.doToken);
         w.body = Statement.parse(s);
 
-        leaveParser("while-statement");
+        leaveParser("while statm");
         return w;
     }
 

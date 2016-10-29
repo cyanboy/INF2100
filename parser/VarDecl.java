@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -24,7 +25,9 @@ public class VarDecl extends PascalDecl {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint(name + " : ");
+        type.prettyPrint();
+        Main.log.prettyPrint("; ");
     }
 
     @Override
@@ -41,7 +44,7 @@ public class VarDecl extends PascalDecl {
     String name;
 
     static VarDecl parse(Scanner s) {
-        enterParser("var-decl");
+        enterParser("var decl");
 
         s.test(TokenKind.nameToken);
         VarDecl v = new VarDecl(s.curToken.id, s.curLineNum());
@@ -53,7 +56,7 @@ public class VarDecl extends PascalDecl {
         v.type = Type.parse(s);
         s.skip(TokenKind.semicolonToken);
 
-        leaveParser("var-decl");
+        leaveParser("var decl");
         return v;
     }
 
@@ -64,4 +67,5 @@ public class VarDecl extends PascalDecl {
     public String identify() {
         return "<var-decl> on line " + this.lineNum;
     }
+
 }

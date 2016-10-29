@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -18,7 +19,7 @@ public class IfStatement extends Statement {
     }
 
     static IfStatement parse(Scanner s) {
-        enterParser("if-statement");
+        enterParser("if-statm");
         s.skip(TokenKind.ifToken);
 
         IfStatement i = new IfStatement(s.curLineNum());
@@ -31,7 +32,7 @@ public class IfStatement extends Statement {
             s.skip(TokenKind.elseToken);
             i.body1 = Statement.parse(s);
         }
-        leaveParser("if-statement");
+        leaveParser("if-stam");
         return i;
     }
 
@@ -52,6 +53,16 @@ public class IfStatement extends Statement {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint("if ");
+        exp.prettyPrint();
+        Main.log.prettyPrintLn(" then ");
+        body0.prettyPrint();
+        if(body1 != null) {
+            Main.log.prettyPrintLn(" ");
+            Main.log.prettyOutdent();
+            Main.log.prettyPrintLn("else");
+            body1.prettyPrint();
+        }
+        Main.log.prettyOutdent();
     }
 }

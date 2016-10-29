@@ -53,6 +53,7 @@ public abstract class Factor extends PascalSyntax {
         return f;
     }
 
+    abstract void prettyPrint();
 
     public abstract void genCode(CodeFile codeFile);
 

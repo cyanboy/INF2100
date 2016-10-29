@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -37,6 +38,7 @@ public class FuncDecl extends PascalDecl {
     }
 
     static FuncDecl parse(Scanner s) {
+        enterParser("func decl");
         s.skip(TokenKind.functionToken);
         FuncDecl f = new FuncDecl(s.curToken.id, s.curLineNum());
         s.skip(TokenKind.nameToken);
@@ -51,6 +53,7 @@ public class FuncDecl extends PascalDecl {
         s.skip(TokenKind.semicolonToken);
         f.body = Block.parse(s);
         s.skip(TokenKind.semicolonToken);
+        leaveParser("func decl");
 
         return f;
     }
@@ -61,11 +64,21 @@ public class FuncDecl extends PascalDecl {
 
     @Override
     public String identify() {
-        return "<func-decl> at line" + lineNum;
+        return "<func decl> at line" + lineNum;
     }
 
     @Override
     void prettyPrint() {
+        Main.log.prettyPrint("function " + name);
+
+        if (declList!=null)
+            declList.prettyPrint();
+
+        Main.log.prettyPrint(":");
+        typeName.prettyPrint();
+        Main.log.prettyPrintLn(";");
+        body.prettyPrint();
+        Main.log.prettyPrintLn(";");
 
     }
 }

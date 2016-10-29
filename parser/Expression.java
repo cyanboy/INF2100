@@ -30,7 +30,11 @@ public class Expression extends PascalSyntax {
 
     @Override
     void prettyPrint() {
-
+        expr0.prettyPrint();
+        if (relOpr != null) {
+            relOpr.prettyPrint();
+            expr1.prettyPrint();
+        }
     }
 
     void check(Block curScope, Library library) {

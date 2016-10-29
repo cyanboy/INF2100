@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -17,7 +18,7 @@ public class StatementList extends PascalSyntax {
     List<Statement> statements = new ArrayList<>();
 
     public static StatementList parse(Scanner s) {
-        enterParser("statement-list");
+        enterParser("statm list");
         StatementList sl = new StatementList(s.curLineNum());
 
 
@@ -28,7 +29,7 @@ public class StatementList extends PascalSyntax {
             sl.statements.add(Statement.parse(s));
         }
 
-        leaveParser("statement-list");
+        leaveParser("statm list");
         return sl;
     }
 
@@ -39,6 +40,10 @@ public class StatementList extends PascalSyntax {
 
     @Override
     void prettyPrint() {
+        statements.forEach(s-> {
+            s.prettyPrint();
+            Main.log.prettyPrint("; ");
+        });
 
     }
 }

@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 
 /**
@@ -11,7 +12,7 @@ public class TermOpr extends Operator {
     }
 
     static TermOpr parse(Scanner s) {
-        enterParser("term-opr");
+        enterParser("term opr");
         TermOpr t = new TermOpr(s.curLineNum());
 
         if (s.curToken.kind.isTermOpr()) {
@@ -19,7 +20,7 @@ public class TermOpr extends Operator {
             s.readNextToken();
         }
 
-        leaveParser("term-opr");
+        leaveParser("term opr");
         return t;
     }
 
@@ -30,6 +31,6 @@ public class TermOpr extends Operator {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint(op.toString());
     }
 }

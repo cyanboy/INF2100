@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -32,13 +33,7 @@ public class AssignStatement extends Statement {
 
     @Override
     public void genCode(CodeFile codeFile) {
-        exp.genCode(codeFile);
 
-        int b = var.decl.declLevel; //block level
-        int o = var.decl.declOffset; // offset
-
-        codeFile.genInstr("", "movl", -4*b + "(%ebp),%edx", "");
-        codeFile.genInstr("", "movl", "%eax," + -o + "(%edx)", var.decl.name + ":=");
     }
 
     @Override
@@ -48,6 +43,9 @@ public class AssignStatement extends Statement {
 
     @Override
     void prettyPrint() {
-
+        var.prettyPrint();
+        Main.log.prettyPrint(" := ");
+        exp.prettyPrint();
+        Main.log.prettyPrintLn();
     }
 }

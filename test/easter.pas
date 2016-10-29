@@ -35,7 +35,7 @@ begin
    day := (h+l-7*m+114) mod 31 + 1;
 
    if month = 3 then
-      write(day, ' ', 'M', 'a', 'r', 'c', 'h', ' ', y, eol)
+      write(day, '''', 'M', 'a', 'r', 'c', 'h', ' ', y, eol)
    else
       write(day, ' ', 'A', 'p', 'r', 'i', 'l', ' ', y, eol);
 end; {easter}

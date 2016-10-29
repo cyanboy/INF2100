@@ -82,7 +82,7 @@ public class Block extends PascalSyntax {
         Main.log.prettyIndent();
         statementList.prettyPrint();
         Main.log.prettyOutdent();
-        Main.log.prettyPrint("end");
+        Main.log.prettyPrintLn("end");
     }
 
 }

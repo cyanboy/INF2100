@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -13,7 +14,7 @@ public class Variable extends Factor {
     }
 
     String name;
-    Expression expr;
+    Expression exp;
 
     PascalDecl decl;
 
@@ -27,7 +28,7 @@ public class Variable extends Factor {
 
         if (s.curToken.kind == TokenKind.leftBracketToken) {
             s.skip(TokenKind.leftBracketToken);
-            v.expr = Expression.parse(s);
+            v.exp = Expression.parse(s);
             s.skip(TokenKind.rightBracketToken);
         }
 
@@ -42,7 +43,13 @@ public class Variable extends Factor {
 
     @Override
     void prettyPrint() {
+        Main.log.prettyPrint(name);
 
+        if(exp != null) {
+            Main.log.prettyPrint("[");
+            exp.prettyPrint();
+            Main.log.prettyPrint("]");
+        }
     }
 
     public void check(Block curScope, Library lib) {

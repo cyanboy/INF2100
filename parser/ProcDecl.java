@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -37,7 +38,7 @@ public class ProcDecl extends PascalDecl {
     Block block;
 
     static ProcDecl parse(Scanner s) {
-        enterParser("proc-decl");
+        enterParser("proc decl");
         ProcDecl p = new ProcDecl(s.curToken.id, s.curLineNum());
         s.skip(TokenKind.procedureToken);
         s.test(TokenKind.nameToken);
@@ -52,7 +53,7 @@ public class ProcDecl extends PascalDecl {
         p.block = Block.parse(s);
         s.skip(TokenKind.semicolonToken);
 
-        leaveParser("proc-decl");
+        leaveParser("proc decl");
         return p;
     }
 
@@ -63,6 +64,16 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     void prettyPrint() {
+        Main.log.prettyPrint("procedure ");
+        Main.log.prettyPrint(name);
 
+        if(declList != null) {
+            declList.prettyPrint();
+        }
+
+        Main.log.prettyPrint(";");
+        Main.log.prettyPrintLn(" ");
+        block.prettyPrint();
+        Main.log.prettyPrint(";");
     }
 }

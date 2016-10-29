@@ -99,6 +99,12 @@ public class Scanner {
             matcher = pattern.matcher(sourceLine);
         }
 
+        if (sourceFile == null) {
+            nextToken = new Token(eofToken, getFileLineNum());
+            Main.log.noteToken(nextToken);
+            return;
+        }
+
         while (!matcher.find()) {
             readNextLine();
             matcher = pattern.matcher(sourceLine);
@@ -132,12 +138,14 @@ public class Scanner {
             if (tmp.length() == 3) { //any other char
                 nextToken = new Token(tmp.charAt(1), getFileLineNum());
             } else if (tmp.equals("''''")) { // single quote
-                nextToken = new Token("'", getFileLineNum());
+                nextToken = new Token('\'', getFileLineNum());
             } else {
                 Main.error(getFileLineNum(), "Illegal char literal: " + tmp);
             }
         } else if (tmp.equals(".")) {
             nextToken = new Token(dotToken, curLineNum());
+            sourceFile = null; //We reached the dot. There is no point in continuing
+
         } else {
             TokenKind kind = getTokenKind(tmp);
             if (kind != null) {

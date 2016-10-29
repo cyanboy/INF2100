@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -15,14 +16,14 @@ public class RangeType extends Type {
     UnsignedConstant to;
 
     static RangeType parse(Scanner s) {
-        enterParser("range-type");
+        enterParser("range type");
         RangeType r = new RangeType(s.curLineNum());
 
         r.from = UnsignedConstant.parse(s);
         s.skip(TokenKind.rangeToken);
         r.to = UnsignedConstant.parse(s);
 
-        leaveParser("range-type");
+        leaveParser("range type");
         return r;
     }
 
@@ -35,5 +36,12 @@ public class RangeType extends Type {
     @Override
     public String identify() {
         return super.identify();
+    }
+
+    @Override
+    void prettyPrint() {
+        from.prettyPrint();
+        Main.log.prettyPrint("..");
+        to.prettyPrint();
     }
 }

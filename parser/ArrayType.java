@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.Token;
 import scanner.TokenKind;
@@ -40,6 +41,16 @@ public class ArrayType extends Type {
     @Override
     void check(Block curScope, Library library) {
 
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrint("array[");
+        a.prettyPrint();
+        Main.log.prettyPrint("..");
+        b.prettyPrint();
+        Main.log.prettyPrint("] of");
+        type.prettyPrint();
     }
 
     @Override

@@ -19,7 +19,7 @@ public class VarDeclPart extends PascalSyntax {
     }
 
     static VarDeclPart parse(Scanner s) {
-        enterParser("var-decl-part");
+        enterParser("var decl part");
 
         VarDeclPart v = new VarDeclPart(s.curLineNum());
         s.skip(TokenKind.varToken);
@@ -28,14 +28,14 @@ public class VarDeclPart extends PascalSyntax {
             v.variables.add(VarDecl.parse(s));
         }
 
-        leaveParser("var-decl-part");
+        leaveParser("var decl part");
 
         return v;
     }
 
     @Override
     public String identify() {
-        return "<var-decl-part> at line " + lineNum;
+        return "<var decl part> at line " + lineNum;
     }
 
     @Override

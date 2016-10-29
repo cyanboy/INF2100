@@ -17,18 +17,18 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint(Character.toString(constant));
+        Main.log.prettyPrint("'" + Character.toString(constant)+"'");
     }
 
     static CharLiteral parse(Scanner s){
-        enterParser("char-literal");
+        enterParser("char literal");
         CharLiteral sl = new CharLiteral(s.curLineNum());
 
         sl.constant = s.curToken.charVal;
 
         s.skip(TokenKind.charValToken);
 
-        leaveParser("CharLiteral");
+        leaveParser("char literal");
         return sl;
     }
 
@@ -44,6 +44,7 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     public String identify() {
-        return "<char-literal> on line " + lineNum;
+        return "<char literal> on line " + lineNum;
     }
+
 }

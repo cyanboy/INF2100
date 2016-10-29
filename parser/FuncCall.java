@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -22,6 +23,13 @@ public class FuncCall extends Factor {
 
     @Override
     void prettyPrint() {
+        Main.log.prettyPrint(name);
+        Main.log.prettyPrint("(");
+        expressions.forEach(e -> {
+            e.prettyPrint();
+            Main.log.prettyPrint(",");
+        });
+        Main.log.prettyPrint(")");
 
     }
 
@@ -30,7 +38,7 @@ public class FuncCall extends Factor {
     PascalDecl decl;
 
     static FuncCall parse(Scanner s) {
-        enterParser("func-call");
+        enterParser("func call");
         FuncCall f = new FuncCall(s.curLineNum());
 
         f.name = s.curToken.id;
@@ -49,7 +57,7 @@ public class FuncCall extends Factor {
             s.skip(TokenKind.rightParToken);
         }
 
-        leaveParser("func-call");
+        leaveParser("func call");
         return f;
     }
 

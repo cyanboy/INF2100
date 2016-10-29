@@ -21,7 +21,7 @@ public class SimpleExpression extends Expression {
     List<TermOpr> termOpr = new ArrayList<>();
 
     static SimpleExpression parse(Scanner s) {
-        enterParser("simple-expression");
+        enterParser("simple expr");
         SimpleExpression se = new SimpleExpression(s.curLineNum());
 
         if (s.curToken.kind.isPrefixOpr()) {
@@ -35,7 +35,7 @@ public class SimpleExpression extends Expression {
             se.term.add(Term.parse(s));
         }
 
-        leaveParser("simple-expression");
+        leaveParser("simple expr");
         return se;
     }
 
@@ -50,5 +50,21 @@ public class SimpleExpression extends Expression {
     @Override
     public String identify() {
         return super.identify();
+    }
+
+    @Override
+    void prettyPrint() {
+        if(prefixOpr != null)
+            prefixOpr.prettyPrint();
+
+        term.get(0).prettyPrint();
+
+        if(termOpr != null) {
+            
+            for(int i = 0; i < termOpr.size(); i++) {
+                termOpr.get(i).prettyPrint();
+                term.get(i+1).prettyPrint();
+            }
+        }
     }
 }

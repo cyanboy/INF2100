@@ -38,6 +38,9 @@ public class Constant extends PascalSyntax {
 
     @Override
     void prettyPrint() {
-
+        if (prefixOpr != null) {
+            prefixOpr.prettyPrint();
+        }
+        uc.prettyPrint();
     }
 }

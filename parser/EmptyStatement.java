@@ -17,8 +17,8 @@ public class EmptyStatement extends Statement {
     }
 
     public static EmptyStatement parse(Scanner s) {
-        enterParser("empty-statement");
-        leaveParser("empty-statement");
+        enterParser("empty statm");
+        leaveParser("empty statm");
         return new EmptyStatement(s.curLineNum());
     }
 

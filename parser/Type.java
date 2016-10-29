@@ -7,7 +7,7 @@ import scanner.TokenKind;
 /**
  * Created by cyanboy on 20/10/15.
  */
-public class Type extends PascalSyntax {
+public abstract class Type extends PascalSyntax {
     public Type(int n) {
         super(n);
     }
@@ -34,8 +34,4 @@ public class Type extends PascalSyntax {
         return null;
     }
 
-    @Override
-    void prettyPrint() {
-
-    }
 }

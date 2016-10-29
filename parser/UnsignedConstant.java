@@ -16,7 +16,7 @@ abstract class UnsignedConstant extends Factor {
     static UnsignedConstant parse(Scanner s) {
         UnsignedConstant uc = null;
 
-        enterParser("unsigned-constant");
+        enterParser("unsigned constant");
 
         if(s.curToken.kind == TokenKind.nameToken){
             uc = Name.parse(s);
@@ -29,7 +29,7 @@ abstract class UnsignedConstant extends Factor {
                     + s.nextToken.kind.toString() + " after it");
         }
 
-        leaveParser("unsigned-constant");
+        leaveParser("unsigned constant");
 
         return uc;
     }
@@ -42,8 +42,4 @@ abstract class UnsignedConstant extends Factor {
         return "";
     }
 
-    @Override
-    void prettyPrint() {
-
-    }
 }

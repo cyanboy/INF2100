@@ -15,7 +15,7 @@ public class RelOpr extends Expression {
     TokenKind kind;
 
     static RelOpr parse(Scanner s) {
-        enterParser("rel-opr");
+        enterParser("rel opr");
         RelOpr r = new RelOpr(s.curLineNum());
 
         if (s.curToken.kind.isRelOpr()) {
@@ -25,7 +25,7 @@ public class RelOpr extends Expression {
             Main.error(s.curLineNum() + ": Expected a RelOpr, found " + s.curToken.kind.toString());
         }
 
-        leaveParser("rel-opr");
+        leaveParser("rel opr");
         return r;
     }
 
@@ -33,5 +33,10 @@ public class RelOpr extends Expression {
     @Override
     public String identify() {
         return super.identify();
+    }
+
+    @Override
+    void prettyPrint() {
+        Main.log.prettyPrint(kind.toString());
     }
 }

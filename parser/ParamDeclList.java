@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -41,6 +42,13 @@ public class ParamDeclList extends PascalSyntax {
 
     @Override
     void prettyPrint() {
+        Main.log.prettyPrint("(");
 
+        parameters.forEach(p -> {
+            p.prettyPrint();
+        });
+        Main.log.prettyPrint("; ");
+
+        Main.log.prettyPrint(")");
     }
 }

@@ -1,6 +1,7 @@
 package parser;
 
 import main.CodeFile;
+import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 
@@ -15,7 +16,9 @@ public class InnerExpression extends Factor {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint("(");
+        exp.prettyPrint();
+        Main.log.prettyPrint(")");
     }
 
     public InnerExpression(int n) {
