@@ -17,14 +17,14 @@ public class AssignStatement extends Statement {
     Variable var;
 
     public static AssignStatement parse(Scanner s) {
-        enterParser("assign-statement");
+        enterParser("assign statm");
         AssignStatement a = new AssignStatement(s.curLineNum());
 
         a.var = Variable.parse(s);
         s.skip(TokenKind.assignToken);
         a.exp = Expression.parse(s);
 
-        leaveParser("assign-statement");
+        leaveParser("assign statm");
         return a;
     }
 

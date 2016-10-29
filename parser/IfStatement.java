@@ -32,7 +32,7 @@ public class IfStatement extends Statement {
             s.skip(TokenKind.elseToken);
             i.body1 = Statement.parse(s);
         }
-        leaveParser("if-stam");
+        leaveParser("if-statm");
         return i;
     }
 

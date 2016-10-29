@@ -28,14 +28,14 @@ public class InnerExpression extends Factor {
     Expression exp;
 
     static InnerExpression parse(Scanner s) {
-        enterParser("inner-expression");
+        enterParser("inner expr");
         InnerExpression i = new InnerExpression(s.curLineNum());
 
         s.skip(TokenKind.leftParToken);
         i.exp = Expression.parse(s);
         s.skip(TokenKind.rightParToken);
 
-        leaveParser("inner-expression");
+        leaveParser("inner expr");
         return i;
     }
 

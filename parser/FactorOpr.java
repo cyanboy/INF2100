@@ -9,7 +9,7 @@ public class FactorOpr extends Operator {
     }
 
     static FactorOpr parse(Scanner s) {
-        enterParser("factor-opr");
+        enterParser("factor opr");
         FactorOpr f = new FactorOpr(s.curLineNum());
 
         if (s.curToken.kind.isFactorOpr()) {
@@ -19,7 +19,7 @@ public class FactorOpr extends Operator {
             Main.error(s.curLineNum() + ": expected a FactorOpr, got " + s.curToken.toString());
         }
 
-        leaveParser("factor-opr");
+        leaveParser("factor opr");
         return f;
     }
 

@@ -18,7 +18,7 @@ public class ConstDeclPart extends PascalSyntax {
 
     static ConstDeclPart parse(Scanner s) {
         ConstDeclPart c = new ConstDeclPart(s.curLineNum());
-        enterParser("const-decl-part");
+        enterParser("const decl part");
 
         s.skip(TokenKind.constToken);
 
@@ -26,13 +26,13 @@ public class ConstDeclPart extends PascalSyntax {
             c.constants.add(ConstDecl.parse(s));
         }
 
-        leaveParser("const-decl-part");
+        leaveParser("const decl part");
         return c;
     }
 
     @Override
     public String identify() {
-        return "<const-decl-part> at line " + lineNum;
+        return "<const decl part> at line " + lineNum;
     }
 
     @Override

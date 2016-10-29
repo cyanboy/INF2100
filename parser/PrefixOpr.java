@@ -12,7 +12,7 @@ public class PrefixOpr extends Operator {
     }
 
     static PrefixOpr parse(Scanner s) {
-        enterParser("prefix-opr");
+        enterParser("prefix opr");
         PrefixOpr p = new PrefixOpr(s.curLineNum());
 
         if (s.curToken.kind.isPrefixOpr()) {
@@ -22,7 +22,7 @@ public class PrefixOpr extends Operator {
             Main.error(s.curLineNum() + ": expected a PrefixOpr, got " + s.curToken.toString());
         }
 
-        leaveParser("prefix-opr");
+        leaveParser("prefix opr");
         return p;
     }
 

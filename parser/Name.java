@@ -21,14 +21,14 @@ public class Name extends UnsignedConstant {
     }
 
     static Name parse(Scanner s) {
-        enterParser("NamedConst");
+        enterParser("name");
         Name n = new Name(s.curLineNum());
 
         s.test(TokenKind.nameToken);
         n.name = s.curToken.id;
         s.readNextToken();
 
-        leaveParser("NamedConst");
+        leaveParser("name");
         return n;
     }
 

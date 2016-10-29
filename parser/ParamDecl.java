@@ -37,7 +37,7 @@ public class ParamDecl extends PascalDecl {
     String name;
 
     static ParamDecl parse(Scanner s) {
-        enterParser("param-decl");
+        enterParser("param decl");
         ParamDecl p = new ParamDecl(s.curToken.id, s.curLineNum());
 
         s.test(TokenKind.nameToken);
@@ -49,7 +49,7 @@ public class ParamDecl extends PascalDecl {
         p.typeName = TypeName.parse(s);
 
 
-        leaveParser("param-decl");
+        leaveParser("param decl");
 
         return p;
     }

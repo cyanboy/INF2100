@@ -30,7 +30,7 @@ public class WhileStatement extends Statement {
     }
 
     public static WhileStatement parse(Scanner s) {
-        enterParser("while statm");
+        enterParser("while-statm");
 
         s.skip(TokenKind.whileToken);
 
@@ -40,7 +40,7 @@ public class WhileStatement extends Statement {
         s.skip(TokenKind.doToken);
         w.body = Statement.parse(s);
 
-        leaveParser("while statm");
+        leaveParser("while-statm");
         return w;
     }
 

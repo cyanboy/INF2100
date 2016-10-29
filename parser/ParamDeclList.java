@@ -19,7 +19,7 @@ public class ParamDeclList extends PascalSyntax {
     List<ParamDecl> parameters = new ArrayList<>();
 
     static ParamDeclList parse(Scanner s) {
-        enterParser("ParamDeclList");
+        enterParser("param decl list");
         ParamDeclList p = new ParamDeclList(s.curLineNum());
 
         s.skip(TokenKind.leftParToken);
@@ -31,7 +31,7 @@ public class ParamDeclList extends PascalSyntax {
         }
         s.skip(TokenKind.rightParToken);
 
-        leaveParser("param-decl-list");
+        leaveParser("param decl list");
         return p;
     }
 

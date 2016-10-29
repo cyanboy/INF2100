@@ -16,14 +16,14 @@ public class NumericLiteral extends UnsignedConstant {
     int val;
 
     static NumericLiteral parse(Scanner s) {
-        enterParser("numeric-literal");
+        enterParser("numeric literal");
         NumericLiteral nl = new NumericLiteral(s.curLineNum());
 
         s.test(TokenKind.intValToken);
         nl.val = s.curToken.intVal;
         s.readNextToken();
 
-        leaveParser("numeric-literal");
+        leaveParser("numeric literal");
         return nl;
     }
 
