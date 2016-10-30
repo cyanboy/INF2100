@@ -37,6 +37,6 @@ public class RelOpr extends Expression {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint(kind.toString());
+        Main.log.prettyPrint(" " + kind.toString() + " ");
     }
 }

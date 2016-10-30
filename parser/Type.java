@@ -1,6 +1,5 @@
 package parser;
 
-import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 

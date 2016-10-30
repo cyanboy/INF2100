@@ -37,7 +37,10 @@ public class ConstDeclPart extends PascalSyntax {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint("const ");
+        Main.log.prettyPrintLn("const");
+
+        Main.log.prettyIndent();
         constants.forEach(ConstDecl::prettyPrint);
+        Main.log.prettyOutdent();
     }
 }

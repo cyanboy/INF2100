@@ -40,7 +40,10 @@ public class VarDeclPart extends PascalSyntax {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint("var ");
+        Main.log.prettyPrintLn("var");
+
+        Main.log.prettyIndent();
         variables.forEach(VarDecl::prettyPrint);
+        Main.log.prettyOutdent();
     }
 }

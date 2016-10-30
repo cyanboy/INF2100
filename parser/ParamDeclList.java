@@ -5,6 +5,7 @@ import scanner.Scanner;
 import scanner.TokenKind;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -44,10 +45,16 @@ public class ParamDeclList extends PascalSyntax {
     void prettyPrint() {
         Main.log.prettyPrint("(");
 
-        parameters.forEach(p -> {
-            p.prettyPrint();
-        });
-        Main.log.prettyPrint("; ");
+        Iterator<ParamDecl> it = parameters.iterator();
+
+        while (it.hasNext()) {
+            ParamDecl pd = it.next();
+            pd.prettyPrint();
+
+            if (it.hasNext()) {
+                Main.log.prettyPrint("; ");
+            }
+        }
 
         Main.log.prettyPrint(")");
     }

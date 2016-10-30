@@ -5,5 +5,5 @@ pc="pascal2016.jar"
 
 for i in "${files[@]}" 
 do
-    java -jar $pc -testscanner test/$i;
+    java -jar $pc -testparser test/$i;
 done

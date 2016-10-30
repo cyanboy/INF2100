@@ -25,7 +25,7 @@ public class WhileStatement extends Statement {
     void prettyPrint() {
         Main.log.prettyPrint("while ");
         expr.prettyPrint();
-        Main.log.prettyPrintLn("do");
+        Main.log.prettyPrintLn(" do");
         body.prettyPrint();
     }
 

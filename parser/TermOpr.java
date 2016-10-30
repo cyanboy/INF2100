@@ -31,6 +31,6 @@ public class TermOpr extends Operator {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint(op.toString());
+        Main.log.prettyPrint(" " + op.toString() + " ");
     }
 }

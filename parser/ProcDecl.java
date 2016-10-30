@@ -71,8 +71,7 @@ public class ProcDecl extends PascalDecl {
             declList.prettyPrint();
         }
 
-        Main.log.prettyPrint(";");
-        Main.log.prettyPrintLn(" ");
+        Main.log.prettyPrintLn(";");
         block.prettyPrint();
         Main.log.prettyPrint(";");
     }

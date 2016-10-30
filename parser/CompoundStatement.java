@@ -48,7 +48,10 @@ public class CompoundStatement extends Statement {
 
     void prettyPrint() {
         Main.log.prettyPrintLn("begin");
+        Main.log.prettyIndent();
+
         statements.prettyPrint();
+
         Main.log.prettyOutdent();
         Main.log.prettyPrintLn("end");
     }

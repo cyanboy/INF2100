@@ -27,7 +27,7 @@ public class VarDecl extends PascalDecl {
     void prettyPrint() {
         Main.log.prettyPrint(name + " : ");
         type.prettyPrint();
-        Main.log.prettyPrint("; ");
+        Main.log.prettyPrintLn(";");
     }
 
     @Override

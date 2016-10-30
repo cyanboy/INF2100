@@ -6,6 +6,7 @@ import scanner.Scanner;
 import scanner.TokenKind;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,12 +25,23 @@ public class FuncCall extends Factor {
     @Override
     void prettyPrint() {
         Main.log.prettyPrint(name);
-        Main.log.prettyPrint("(");
-        expressions.forEach(e -> {
-            e.prettyPrint();
-            Main.log.prettyPrint(",");
-        });
-        Main.log.prettyPrint(")");
+
+        if (!expressions.isEmpty()) {
+            Main.log.prettyPrint("(");
+
+            Iterator<Expression> it = expressions.iterator();
+
+            while (it.hasNext()) {
+                Expression exp = it.next();
+                exp.prettyPrint();
+                if (it.hasNext()) {
+                    Main.log.prettyPrint(", ");
+                }
+            }
+
+            Main.log.prettyPrint(")");
+        }
+
 
     }
 

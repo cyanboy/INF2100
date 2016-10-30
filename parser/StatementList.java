@@ -5,6 +5,7 @@ import scanner.Scanner;
 import scanner.TokenKind;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -40,10 +41,15 @@ public class StatementList extends PascalSyntax {
 
     @Override
     void prettyPrint() {
-        statements.forEach(s-> {
-            s.prettyPrint();
-            Main.log.prettyPrint("; ");
-        });
+        Iterator<Statement> it = statements.iterator();
 
+        while (it.hasNext()) {
+            Statement s = it.next();
+            s.prettyPrint();
+
+            if (it.hasNext()) {
+                Main.log.prettyPrintLn("|");
+            }
+        }
     }
 }

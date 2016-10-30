@@ -45,11 +45,11 @@ public class ArrayType extends Type {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint("array[");
+        Main.log.prettyPrint("array [");
         a.prettyPrint();
-        Main.log.prettyPrint("..");
+        Main.log.prettyPrint(" .. ");
         b.prettyPrint();
-        Main.log.prettyPrint("] of");
+        Main.log.prettyPrint("] of ");
         type.prettyPrint();
     }
 

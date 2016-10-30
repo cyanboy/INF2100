@@ -69,13 +69,15 @@ public class FuncDecl extends PascalDecl {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint("function " + name);
+        Main.log.prettyPrint("function " + name + " ");
 
         if (declList!=null)
             declList.prettyPrint();
 
-        Main.log.prettyPrint(":");
+        Main.log.prettyPrint(": ");
+
         typeName.prettyPrint();
+
         Main.log.prettyPrintLn(";");
         body.prettyPrint();
         Main.log.prettyPrintLn(";");

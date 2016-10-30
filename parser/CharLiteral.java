@@ -17,7 +17,10 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint("'" + Character.toString(constant)+"'");
+        if (constant == '\'')
+            Main.log.prettyPrint("''" + Character.toString(constant) + "'");
+        else
+            Main.log.prettyPrint("'" + Character.toString(constant) + "'");
     }
 
     static CharLiteral parse(Scanner s){

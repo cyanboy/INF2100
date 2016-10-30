@@ -13,7 +13,6 @@ public class IfStatement extends Statement {
     Statement body0;
     Statement body1;
 
-
     IfStatement(int lNum) {
         super(lNum);
     }
@@ -55,14 +54,21 @@ public class IfStatement extends Statement {
     void prettyPrint() {
         Main.log.prettyPrint("if ");
         exp.prettyPrint();
+
         Main.log.prettyPrintLn(" then ");
+
+        Main.log.prettyIndent();
         body0.prettyPrint();
+
         if(body1 != null) {
-            Main.log.prettyPrintLn(" ");
+            Main.log.prettyPrintLn();
             Main.log.prettyOutdent();
             Main.log.prettyPrintLn("else");
+
+            Main.log.prettyIndent();
             body1.prettyPrint();
         }
         Main.log.prettyOutdent();
+        //Main.log.prettyPrintLn();
     }
 }

@@ -46,6 +46,5 @@ public class AssignStatement extends Statement {
         var.prettyPrint();
         Main.log.prettyPrint(" := ");
         exp.prettyPrint();
-        Main.log.prettyPrintLn();
     }
 }

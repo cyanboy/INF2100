@@ -30,6 +30,6 @@ public class FactorOpr extends Operator {
 
     @Override
     void prettyPrint() {
-        Main.log.prettyPrint(this.op.toString());
+        Main.log.prettyPrint(" " + this.op.toString() + " ");
     }
 }

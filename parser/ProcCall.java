@@ -6,6 +6,7 @@ import scanner.Scanner;
 import scanner.TokenKind;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,10 +65,17 @@ public class ProcCall extends Statement {
         Main.log.prettyPrint(name);
         Main.log.prettyPrint("(");
 
-        expressions.forEach(e -> {
-            e.prettyPrint();
-            Main.log.prettyPrint(",");
-        });
+        Iterator<Expression> it = expressions.iterator();
+
+        while (it.hasNext()) {
+            Expression exp = it.next();
+            exp.prettyPrint();
+
+            if (it.hasNext()) {
+                Main.log.prettyPrint(", ");
+            }
+
+        }
 
         Main.log.prettyPrint(")");
     }

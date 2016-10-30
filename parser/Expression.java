@@ -3,7 +3,6 @@ package parser;
 
 import main.CodeFile;
 import scanner.Scanner;
-import scanner.TokenKind;
 
 public class Expression extends PascalSyntax {
     Expression(int lNum) {

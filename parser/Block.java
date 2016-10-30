@@ -75,14 +75,17 @@ public class Block extends PascalSyntax {
             varDeclPart.prettyPrint();
         }
 
-        procDeclList.forEach(ProcDecl::prettyPrint);
-        funcDeclList.forEach(FuncDecl::prettyPrint);
+        procDeclList.forEach(pd -> { pd.prettyPrint(); Main.log.prettyPrintLn(); } );
+        funcDeclList.forEach(fd -> { fd.prettyPrint(); Main.log.prettyPrintLn(); } );
 
         Main.log.prettyPrintLn("begin");
+
         Main.log.prettyIndent();
+
         statementList.prettyPrint();
+
         Main.log.prettyOutdent();
-        Main.log.prettyPrintLn("end");
+        Main.log.prettyPrint("end");
     }
 
 }
