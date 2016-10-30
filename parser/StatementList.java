@@ -47,9 +47,11 @@ public class StatementList extends PascalSyntax {
             Statement s = it.next();
             s.prettyPrint();
 
-            if (it.hasNext()) {
-                Main.log.prettyPrintLn("|");
-            }
+            if (it.hasNext())
+                Main.log.prettyPrint(";");
+
+            Main.log.prettyPrintLn();
+            
         }
     }
 }

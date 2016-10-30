@@ -85,6 +85,7 @@ public class Block extends PascalSyntax {
         statementList.prettyPrint();
 
         Main.log.prettyOutdent();
+//        Main.log.prettyPrintLn();
         Main.log.prettyPrint("end");
     }
 

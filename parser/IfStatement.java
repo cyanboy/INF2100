@@ -67,8 +67,8 @@ public class IfStatement extends Statement {
 
             Main.log.prettyIndent();
             body1.prettyPrint();
+            //Main.log.prettyPrintLn();
         }
         Main.log.prettyOutdent();
-        //Main.log.prettyPrintLn();
     }
 }

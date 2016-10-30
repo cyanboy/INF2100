@@ -43,8 +43,10 @@ begin
    begin
       if prime[i] then
       begin
-	 if (NPrinted > 0) and (NPrinted mod 10 = 0) then write(eol);
-	 P4(i);  NPrinted := NPrinted + 1;
+	     if (NPrinted > 0) and (NPrinted mod 10 = 0) then
+            write(eol);
+         P4(i);
+         NPrinted := NPrinted + 1;
       end;
       i := i + 1;
    end;
