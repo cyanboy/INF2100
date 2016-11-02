@@ -52,7 +52,6 @@ public class CompoundStatement extends Statement {
 
         statements.prettyPrint();
         Main.log.prettyOutdent();
-//        Main.log.prettyPrintLn();
         Main.log.prettyPrint("end");
     }
 }
