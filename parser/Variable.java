@@ -53,7 +53,8 @@ public class Variable extends Factor {
     }
 
     public void check(Block curScope, Library lib) {
-
+        curScope.findDecl(name, this);
+        if (exp != null) exp.check(curScope, lib);
     }
 
     @Override

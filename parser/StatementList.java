@@ -16,7 +16,13 @@ public class StatementList extends PascalSyntax {
         super(n);
     }
 
+
     List<Statement> statements = new ArrayList<>();
+
+    @Override
+    void check(Block curScope, Library lib) {
+        statements.forEach(statement -> statement.check(curScope, lib));
+    }
 
     public static StatementList parse(Scanner s) {
         enterParser("statm list");

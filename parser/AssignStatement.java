@@ -13,8 +13,9 @@ public class AssignStatement extends Statement {
         super(lNum);
     }
 
-    Expression exp;
     Variable var;
+    Expression exp;
+
 
     public static AssignStatement parse(Scanner s) {
         enterParser("assign statm");
@@ -29,7 +30,10 @@ public class AssignStatement extends Statement {
     }
 
     @Override
-    public void check(Block curScope, Library library) {}
+    public void check(Block curScope, Library library) {
+        var.check(curScope, library);
+        exp.check(curScope, library);
+    }
 
     @Override
     public void genCode(CodeFile codeFile) {

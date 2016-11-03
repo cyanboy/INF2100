@@ -58,8 +58,14 @@ public class ProcDecl extends PascalDecl {
     }
 
     @Override
+    void check(Block curScope, Library lib) {
+        if (declList != null) declList.check(curScope, lib);
+        block.check(curScope, lib);
+    }
+
+    @Override
     public String identify() {
-        return "<proc-decl> at line " + lineNum;
+        return "<proc decl> at line " + lineNum;
     }
 
     @Override

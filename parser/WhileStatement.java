@@ -48,5 +48,7 @@ public class WhileStatement extends Statement {
     }
 
     public void check(Block curScope, Library library) {
+        expr.check(curScope, library);
+        body.check(curScope, library);
     }
 }

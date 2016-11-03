@@ -32,7 +32,7 @@ public class TypeName extends Type {
 
     @Override
     public String identify() {
-        return super.identify();
+        return null;
     }
 
     @Override

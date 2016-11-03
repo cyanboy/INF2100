@@ -79,5 +79,7 @@ public class FuncCall extends Factor {
 
     @Override
     public void check(Block curScope, Library library) {
+        curScope.findDecl(name, this);
+        expressions.forEach(exp -> exp.check(curScope, library));
     }
 }

@@ -55,7 +55,7 @@ public class Token {
         else
             kind = nameToken;
 
-        id = s.toLowerCase();
+        id = s;
         lineNum = lNum;
     }
 

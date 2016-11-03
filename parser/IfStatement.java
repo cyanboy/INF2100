@@ -42,7 +42,9 @@ public class IfStatement extends Statement {
 
     @Override
     public void check(Block curScope, Library library) {
-
+        exp.check(curScope, library);
+        body0.check(curScope, library);
+        if (body1 != null) body1.check(curScope, library);
     }
 
     @Override

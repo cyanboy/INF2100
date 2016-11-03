@@ -26,11 +26,9 @@ public abstract class Type extends PascalSyntax {
         return t;
     }
 
-    void check(Block curScope, Library library) {}
+    void check(Block curScope, Library library) {
 
-    @Override
-    public String identify() {
-        return null;
     }
+
 
 }

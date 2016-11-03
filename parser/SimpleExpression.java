@@ -42,6 +42,9 @@ public class SimpleExpression extends Expression {
 
     @Override
     void check(Block curScope, Library library) {
+        if (prefixOpr != null) prefixOpr.check(curScope, library);
+        term.forEach(t -> t.check(curScope, library));
+        termOpr.forEach(tOp -> tOp.check(curScope, library));
     }
 
     public void genCode(CodeFile codeFile) {

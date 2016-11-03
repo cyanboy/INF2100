@@ -14,6 +14,11 @@ public class ConstDeclPart extends PascalSyntax {
         constants = new ArrayList<>();
     }
 
+    @Override
+    void check(Block curScope, Library lib) {
+        constants.forEach(c -> c.check(curScope, lib));
+    }
+
     List<ConstDecl> constants;
 
     static ConstDeclPart parse(Scanner s) {

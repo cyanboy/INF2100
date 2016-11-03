@@ -1,6 +1,5 @@
 package parser;
 
-import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -26,6 +25,40 @@ public class Block extends PascalSyntax {
 
     List<FuncDecl> funcDeclList = new ArrayList<>();
     List<ProcDecl> procDeclList = new ArrayList<>();
+
+    public void check(Block curScope, Library lib) {
+        if (constDeclPart != null) {
+            constDeclPart.constants.forEach(constDecl -> addDecl(constDecl.name, constDecl));
+            constDeclPart.check(this, lib);
+        }
+
+        if (varDeclPart != null) {
+            varDeclPart.variables.forEach(varDecl -> addDecl(varDecl.name, varDecl));
+        }
+
+        funcDeclList.forEach(funcDecl -> addDecl(funcDecl.name, funcDecl));
+        procDeclList.forEach(procDecl -> addDecl(procDecl.name, procDecl));
+
+        statementList.check(this, lib);
+    }
+
+    public void addDecl(String id, PascalDecl d) {
+        if (decls.containsKey(id))
+            d.error(id + " declared twice in same block!");
+        decls.put(id, d);
+    }
+
+    public PascalDecl findDecl(String id, PascalSyntax where) {
+        PascalDecl d = decls.get(id);
+        if (d != null) {
+            Main.log.noteBinding(id, where, d);
+            return d;
+        }
+        if (outerScope != null)
+            return outerScope.findDecl(id,where);
+        where.error("Name " + id + " is unknown!");
+        return null; // Required by the Java compiler.
+    }
 
     public static Block parse(Scanner s) {
         enterParser("block");

@@ -39,6 +39,6 @@ public class Name extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library library) {
-
+        curScope.findDecl(name, this);
     }
 }

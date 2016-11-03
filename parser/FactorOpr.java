@@ -8,6 +8,11 @@ public class FactorOpr extends Operator {
         super(n);
     }
 
+    @Override
+    void check(Block curScope, Library lib) {
+
+    }
+
     static FactorOpr parse(Scanner s) {
         enterParser("factor opr");
         FactorOpr f = new FactorOpr(s.curLineNum());

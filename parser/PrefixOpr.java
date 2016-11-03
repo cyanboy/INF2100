@@ -11,6 +11,11 @@ public class PrefixOpr extends Operator {
         super(n);
     }
 
+    @Override
+    void check(Block curScope, Library lib) {
+
+    }
+
     static PrefixOpr parse(Scanner s) {
         enterParser("prefix opr");
         PrefixOpr p = new PrefixOpr(s.curLineNum());

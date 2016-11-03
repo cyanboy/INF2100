@@ -60,6 +60,9 @@ public class FuncDecl extends PascalDecl {
 
 
     void check(Block curScope, Library library) {
+        if (declList != null) declList.check(body, library);
+        typeName.check(curScope, library);
+        body.check(curScope, library);
     }
 
     @Override

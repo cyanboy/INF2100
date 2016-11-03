@@ -34,9 +34,7 @@ public class CompoundStatement extends Statement {
     }
 
     public void check(Block curScope, Library library) {
-        for (Statement st : statements.statements) {
-            st.check(curScope, library);
-        }
+        statements.check(curScope, library);
     }
 
     @Override
@@ -45,7 +43,6 @@ public class CompoundStatement extends Statement {
     }
 
     @Override
-
     void prettyPrint() {
         Main.log.prettyPrintLn("begin");
         Main.log.prettyIndent();

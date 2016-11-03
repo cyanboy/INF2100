@@ -52,7 +52,8 @@ public class ProcCall extends Statement {
 
     @Override
     public void check(Block curScope, Library library) {
-
+        curScope.findDecl(name, this);
+        expressions.forEach(expression -> expression.check(curScope, library));
     }
 
     @Override

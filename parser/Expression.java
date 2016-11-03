@@ -37,7 +37,12 @@ public class Expression extends PascalSyntax {
     }
 
     void check(Block curScope, Library library) {
+        expr0.check(curScope, library);
 
+        if (relOpr != null) {
+            relOpr.check(curScope, library);
+            expr1.check(curScope, library);
+        }
     }
 
     public void genCode(CodeFile codeFile) {
