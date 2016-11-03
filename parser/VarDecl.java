@@ -65,7 +65,7 @@ public class VarDecl extends PascalDecl {
     }
     @Override
     public String identify() {
-        return "<var-decl> on line " + this.lineNum;
+        return "<var decl> on line " + this.lineNum;
     }
 
 }

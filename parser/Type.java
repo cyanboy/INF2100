@@ -26,9 +26,4 @@ public abstract class Type extends PascalSyntax {
         return t;
     }
 
-    void check(Block curScope, Library library) {
-
-    }
-
-
 }

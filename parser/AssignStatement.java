@@ -13,7 +13,7 @@ public class AssignStatement extends Statement {
         super(lNum);
     }
 
-    Variable var;
+     Variable var;
     Expression exp;
 
 

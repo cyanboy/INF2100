@@ -18,6 +18,11 @@ public class VarDeclPart extends PascalSyntax {
         super(lNum);
     }
 
+    @Override
+    void check(Block curScope, Library lib) {
+        variables.forEach(v -> v.check(curScope, lib));
+    }
+
     static VarDeclPart parse(Scanner s) {
         enterParser("var decl part");
 

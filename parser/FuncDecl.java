@@ -67,7 +67,7 @@ public class FuncDecl extends PascalDecl {
 
     @Override
     public String identify() {
-        return "<func decl> at line" + lineNum;
+        return "<func decl> at line " + lineNum;
     }
 
     @Override

@@ -17,6 +17,14 @@ public class ParamDeclList extends PascalSyntax {
         super(n);
     }
 
+    @Override
+    void check(Block curScope, Library lib) {
+        parameters.forEach(p -> {
+            curScope.addDecl(p.name, p);
+            p.check(curScope, lib);
+        });
+    }
+
     List<ParamDecl> parameters = new ArrayList<>();
 
     static ParamDeclList parse(Scanner s) {

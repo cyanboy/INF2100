@@ -13,6 +13,7 @@ public class TypeName extends Type {
     }
 
     String name;
+    PascalDecl decl;
 
     static TypeName parse(Scanner s) {
         enterParser("type name");
@@ -27,7 +28,7 @@ public class TypeName extends Type {
 
     @Override
     void check(Block curScope, Library library) {
-
+        decl = library.findDecl(name, this);
     }
 
     @Override

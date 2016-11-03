@@ -7,9 +7,14 @@ import scanner.TokenKind;
 /**
  * Created by cyanboy on 20/10/15.
  */
-public class RelOpr extends Expression {
+public class RelOpr extends Operator {
     public RelOpr(int lNum) {
         super(lNum);
+    }
+
+    @Override
+    void check(Block curScope, Library lib) {
+
     }
 
     TokenKind kind;

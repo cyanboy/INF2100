@@ -21,7 +21,9 @@ public class StatementList extends PascalSyntax {
 
     @Override
     void check(Block curScope, Library lib) {
-        statements.forEach(statement -> statement.check(curScope, lib));
+        for (Statement s : statements) {
+            s.check(curScope, lib);
+        }
     }
 
     public static StatementList parse(Scanner s) {

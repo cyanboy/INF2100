@@ -27,7 +27,6 @@ public class LogFile {
             prettyPrintLn();
     }
 
-
     public String identify() {
         String t = "Log file";
         if (logFileName != null)

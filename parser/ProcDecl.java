@@ -33,7 +33,7 @@ public class ProcDecl extends PascalDecl {
 
     }
 
-    String name;
+    //String name;
     ParamDeclList declList;
     Block block;
 

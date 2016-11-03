@@ -11,6 +11,11 @@ public class TermOpr extends Operator {
         super(n);
     }
 
+    @Override
+    void check(Block curScope, Library lib) {
+
+    }
+
     static TermOpr parse(Scanner s) {
         enterParser("term opr");
         TermOpr t = new TermOpr(s.curLineNum());

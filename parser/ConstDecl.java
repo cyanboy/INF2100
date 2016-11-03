@@ -57,7 +57,7 @@ public class ConstDecl extends PascalDecl {
 
     @Override
     public String identify() {
-        return "<const-decl> on line " + lineNum;
+        return "<const decl> on line " + lineNum;
     }
 
     @Override

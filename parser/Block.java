@@ -27,6 +27,9 @@ public class Block extends PascalSyntax {
     List<ProcDecl> procDeclList = new ArrayList<>();
 
     public void check(Block curScope, Library lib) {
+        outerScope = curScope;
+        declLevel = outerScope.declLevel + 1;
+
         if (constDeclPart != null) {
             constDeclPart.constants.forEach(constDecl -> addDecl(constDecl.name, constDecl));
             constDeclPart.check(this, lib);
@@ -34,10 +37,18 @@ public class Block extends PascalSyntax {
 
         if (varDeclPart != null) {
             varDeclPart.variables.forEach(varDecl -> addDecl(varDecl.name, varDecl));
+            varDeclPart.check(this, lib);
         }
 
-        funcDeclList.forEach(funcDecl -> addDecl(funcDecl.name, funcDecl));
-        procDeclList.forEach(procDecl -> addDecl(procDecl.name, procDecl));
+        funcDeclList.forEach(funcDecl -> {
+            addDecl(funcDecl.name, funcDecl);
+            funcDecl.check(this, lib);
+        });
+
+        procDeclList.forEach(procDecl -> {
+            addDecl(procDecl.name, procDecl);
+            procDecl.check(this, lib);
+        });
 
         statementList.check(this, lib);
     }

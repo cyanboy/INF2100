@@ -154,7 +154,7 @@ public class Scanner {
                     nextToken = new Token(Integer.parseInt(tmp), getFileLineNum());
                 } else {
                     nextToken = new Token(kind, getFileLineNum());
-                    nextToken.id = tmp;
+                    nextToken.id = tmp.toLowerCase();
                 }
 
             } else {

@@ -33,8 +33,16 @@ public class Term extends PascalSyntax {
     }
 
     void check(Block curScope, Library library) {
-        factors.forEach(f -> check(curScope, library));
-        factorOprs.forEach(f -> check(curScope, library));
+        //factors.forEach(f -> check(curScope, library));
+        for (Factor f : factors) {
+            f.check(curScope, library);
+        }
+
+        for (FactorOpr f : factorOprs) {
+            f.check(curScope, library);
+        }
+
+        //factorOprs.forEach(f -> check(curScope, library));
     }
 
     public void genCode(CodeFile codeFile) {

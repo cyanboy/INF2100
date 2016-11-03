@@ -12,9 +12,12 @@ public class Constant extends PascalSyntax {
     PrefixOpr prefixOpr;
     UnsignedConstant uc;
 
-
     Constant(int lNum) {
         super(lNum);
+    }
+
+    @Override
+    void check(Block curScope, Library lib) {
     }
 
     @Override
