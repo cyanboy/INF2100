@@ -8,5 +8,5 @@ end; {Doble}
 
 begin
    Doble(6);
-   write('X = ', X, EoL)
+   write('X', '=', X, EoL)
 end.

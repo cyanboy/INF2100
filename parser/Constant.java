@@ -18,6 +18,9 @@ public class Constant extends PascalSyntax {
 
     @Override
     void check(Block curScope, Library lib) {
+        if (prefixOpr != null)
+            prefixOpr.check(curScope,lib);
+        uc.check(curScope, lib);
     }
 
     @Override

@@ -9,7 +9,6 @@ import scanner.TokenKind;
  */
 public class ConstDecl extends PascalDecl {
     Constant constant;
-    String name;
 
     public ConstDecl(String id, int lNum) {
         super(id, lNum);

@@ -40,7 +40,9 @@ public class ArrayType extends Type {
 
     @Override
     void check(Block curScope, Library library) {
-
+        type.check(curScope, library);
+        a.check(curScope, library);
+        b.check(curScope, library);
     }
 
     @Override

@@ -59,7 +59,7 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     void check(Block curScope, Library lib) {
-        if (declList != null) declList.check(curScope, lib);
+        if (declList != null) declList.check(block, lib);
         block.check(curScope, lib);
     }
 
