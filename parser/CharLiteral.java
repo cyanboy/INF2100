@@ -4,12 +4,14 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 /**
  * Created by cyanboy on 02/11/15.
  */
 public class CharLiteral extends UnsignedConstant {
     char constant;
+    types.Type type = new CharType();
 
     public CharLiteral(int lNum) {
         super(lNum);

@@ -52,7 +52,9 @@ public class ProcCall extends Statement {
 
     @Override
     public void check(Block curScope, Library library) {
-        curScope.findDecl(name, this);
+        decl = curScope.findDecl(name, this);
+        decl.checkWhetherProcedure(this);
+
         expressions.forEach(expression -> expression.check(curScope, library));
     }
 

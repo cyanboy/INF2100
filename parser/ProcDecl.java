@@ -15,22 +15,22 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
-
+        Main.error(lineNum, name + " is a procedure, not a variable");
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        Main.error(lineNum, name + " is a procedure, not a function");
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        // AIGHT
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        Main.error(lineNum, name + " is a procedure, not a value");
     }
 
     //String name;

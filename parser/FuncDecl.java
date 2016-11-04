@@ -19,22 +19,23 @@ public class FuncDecl extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
-
+        // OK -- returverdi
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        // OKIDOKI
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
+        where.error("A function is not a procedure");
 
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        //OK?
     }
 
     static FuncDecl parse(Scanner s) {

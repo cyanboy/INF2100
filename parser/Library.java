@@ -1,6 +1,10 @@
 package parser;
 
 
+import types.*;
+import types.ArrayType;
+import types.Type;
+
 /**
  * Created by cyanboy on 16/10/2016.
  */
@@ -33,6 +37,11 @@ public class Library extends Block {
         @Override
         void prettyPrint() {}
     }
+
+    types.Type booleanType = new types.BoolType();
+    types.Type integerType = new types.IntType();
+    types.Type charType = new types.CharType();
+
     public Library(int lnum) {
         super(lnum);
 

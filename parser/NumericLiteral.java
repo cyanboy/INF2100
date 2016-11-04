@@ -4,6 +4,7 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 /**
  * Created by cyanboy on 20/10/15.
@@ -14,6 +15,7 @@ public class NumericLiteral extends UnsignedConstant {
     }
 
     int val;
+    types.Type type = new IntType();
 
     static NumericLiteral parse(Scanner s) {
         enterParser("numeric literal");

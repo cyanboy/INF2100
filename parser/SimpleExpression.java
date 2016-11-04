@@ -4,6 +4,7 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class SimpleExpression extends PascalSyntax {
     public SimpleExpression(int lNum) {
         super(lNum);
     }
+
+    types.Type type;
 
     PrefixOpr prefixOpr;
 

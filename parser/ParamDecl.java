@@ -16,22 +16,24 @@ public class ParamDecl extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
-
+        // OK
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
+        where.error("A parameter is not a function");
 
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
+        where.error("A parameter is not a procedure");
 
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        //OK?
     }
 
     //String name;

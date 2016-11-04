@@ -13,7 +13,7 @@ public class AssignStatement extends Statement {
         super(lNum);
     }
 
-     Variable var;
+    Variable var;
     Expression exp;
 
 
@@ -32,7 +32,10 @@ public class AssignStatement extends Statement {
     @Override
     public void check(Block curScope, Library library) {
         var.check(curScope, library);
+        var.decl.checkWhetherAssignable(this);
         exp.check(curScope, library);
+
+        var.type.checkType(exp.type, ":=", this, "assignment type mismatch");
     }
 
     @Override

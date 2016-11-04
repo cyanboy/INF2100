@@ -16,22 +16,23 @@ public class ConstDecl extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
+        where.error("A constant is not assignable");
 
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        where.error("A constant is not a function");
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        where.error("A constant is not a procedure");
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        //OK
     }
 
     static ConstDecl parse(Scanner s) {

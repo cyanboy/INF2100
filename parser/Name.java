@@ -4,12 +4,15 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 /**
  * Created by cyanboy on 03/11/15.
  */
 public class Name extends UnsignedConstant {
     String name;
+    PascalDecl decl;
+    types.Type type;
 
     public Name(int lNum) {
         super(lNum);
@@ -39,6 +42,7 @@ public class Name extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library library) {
-        curScope.findDecl(name, this);
+        decl = curScope.findDecl(name, this);
+        type = decl.type;
     }
 }

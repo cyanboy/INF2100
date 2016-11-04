@@ -17,22 +17,22 @@ public class Program extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
-
+        where.error("A program is not assignable");
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        where.error("A program is not a function");
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        where.error("A program is not a procedure");
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        where.error("A program is not a value");
     }
 
     public static Program parse(Scanner s) {

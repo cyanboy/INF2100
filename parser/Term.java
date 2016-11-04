@@ -2,6 +2,7 @@ package parser;
 
 import main.CodeFile;
 import scanner.Scanner;
+import types.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ public class Term extends PascalSyntax {
     public Term(int n) {
         super(n);
     }
+
+    types.Type type;
 
     public List<Factor> factors = new ArrayList<>();
     List<FactorOpr> factorOprs = new ArrayList<>();
@@ -33,7 +36,7 @@ public class Term extends PascalSyntax {
     }
 
     void check(Block curScope, Library library) {
-        //factors.forEach(f -> check(curScope, library));
+
         for (Factor f : factors) {
             f.check(curScope, library);
         }
@@ -42,7 +45,7 @@ public class Term extends PascalSyntax {
             f.check(curScope, library);
         }
 
-        //factorOprs.forEach(f -> check(curScope, library));
+
     }
 
     public void genCode(CodeFile codeFile) {

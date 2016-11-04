@@ -4,6 +4,7 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,6 +49,7 @@ public class FuncCall extends Factor {
     String name;
     List<Expression> expressions = new ArrayList<>();
     PascalDecl decl;
+    types.Type type;
 
     static FuncCall parse(Scanner s) {
         enterParser("func call");
@@ -79,7 +81,8 @@ public class FuncCall extends Factor {
 
     @Override
     public void check(Block curScope, Library library) {
-        curScope.findDecl(name, this);
+        decl = curScope.findDecl(name, this);
+        decl.checkWhetherFunction(this);
         expressions.forEach(exp -> exp.check(curScope, library));
     }
 }

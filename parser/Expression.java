@@ -3,11 +3,14 @@ package parser;
 
 import main.CodeFile;
 import scanner.Scanner;
+import types.*;
 
 public class Expression extends PascalSyntax {
     Expression(int lNum) {
         super(lNum);
     }
+
+    types.Type type;
 
     SimpleExpression expr0;
     RelOpr relOpr;

@@ -15,12 +15,12 @@ public class VarDecl extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
-
+        // ALL GOOD
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        where.error("A variable is not a function");
     }
 
     @Override
@@ -32,12 +32,12 @@ public class VarDecl extends PascalDecl {
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        where.error("A variable is not a procedure");
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        //OK?
     }
 
     Type type;

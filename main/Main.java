@@ -196,13 +196,6 @@ public class Main {
         }
     }
 
-
-    public static void dbgPrint(String msg) {
-        if (log.doLogScanner || log.doLogBinding || log.doLogParser || log.doLogPrettyPrint || log.doLogTypeChecks) {
-            System.out.println(msg);
-        }
-    }
-
     // Error message utilities:
 
     public static void error(String message) {

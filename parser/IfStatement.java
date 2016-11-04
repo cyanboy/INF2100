@@ -43,6 +43,7 @@ public class IfStatement extends Statement {
     @Override
     public void check(Block curScope, Library library) {
         exp.check(curScope, library);
+        exp.type.checkType(library.booleanType, "if-test", this, "If-Test is not Boolean");
         body0.check(curScope, library);
         if (body1 != null) body1.check(curScope, library);
     }
