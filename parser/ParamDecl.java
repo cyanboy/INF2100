@@ -59,6 +59,7 @@ public class ParamDecl extends PascalDecl {
     @Override
     void check(Block curScope, Library lib) {
         typeName.check(curScope, lib);
+        type = typeName.type;
     }
 
     @Override

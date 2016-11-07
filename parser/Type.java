@@ -11,6 +11,8 @@ public abstract class Type extends PascalSyntax {
         super(n);
     }
 
+    types.Type type;
+
     static Type parse(Scanner s) {
         enterParser("type");
 

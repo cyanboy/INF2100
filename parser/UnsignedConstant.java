@@ -33,9 +33,4 @@ abstract class UnsignedConstant extends Factor {
         return uc;
     }
 
-    @Override
-    public String identify() {
-        return "";
-    }
-
 }

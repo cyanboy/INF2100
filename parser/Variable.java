@@ -5,6 +5,7 @@ import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 import types.*;
+import types.ArrayType;
 
 /**
  * Created by cyanboy on 18/10/15.
@@ -18,7 +19,6 @@ public class Variable extends Factor {
     Expression exp;
 
     PascalDecl decl;
-    types.Type type;
 
     public static Variable parse(Scanner s) {
         enterParser("variable");
@@ -59,7 +59,7 @@ public class Variable extends Factor {
         type = decl.type;
         if (exp != null) {
             exp.check(curScope, lib);
-            type = exp.type;
+            type = ((ArrayType) decl.type).elemType;
         }
     }
 

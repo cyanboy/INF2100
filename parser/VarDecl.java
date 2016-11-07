@@ -26,7 +26,7 @@ public class VarDecl extends PascalDecl {
     @Override
     void prettyPrint() {
         Main.log.prettyPrint(name + " : ");
-        type.prettyPrint();
+        pType.prettyPrint();
         Main.log.prettyPrintLn(";");
     }
 
@@ -40,7 +40,7 @@ public class VarDecl extends PascalDecl {
         //OK?
     }
 
-    Type type;
+    parser.Type pType;
     String name;
 
     static VarDecl parse(Scanner s) {
@@ -53,7 +53,7 @@ public class VarDecl extends PascalDecl {
         s.skip(TokenKind.nameToken);
 
         s.skip(TokenKind.colonToken);
-        v.type = Type.parse(s);
+        v.pType = Type.parse(s);
         s.skip(TokenKind.semicolonToken);
 
         leaveParser("var decl");
@@ -61,7 +61,8 @@ public class VarDecl extends PascalDecl {
     }
 
     public void check(Block curScope, Library library) {
-        type.check(curScope, library);
+        pType.check(curScope, library);
+        type = pType.type;
     }
     @Override
     public String identify() {

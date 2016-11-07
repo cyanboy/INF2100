@@ -42,14 +42,11 @@ public class FuncCall extends Factor {
 
             Main.log.prettyPrint(")");
         }
-
-
     }
 
     String name;
     List<Expression> expressions = new ArrayList<>();
     PascalDecl decl;
-    types.Type type;
 
     static FuncCall parse(Scanner s) {
         enterParser("func call");
@@ -83,6 +80,22 @@ public class FuncCall extends Factor {
     public void check(Block curScope, Library library) {
         decl = curScope.findDecl(name, this);
         decl.checkWhetherFunction(this);
-        expressions.forEach(exp -> exp.check(curScope, library));
+        this.type = decl.type;
+
+        expressions.forEach(expression -> expression.check(curScope, library));
+
+        if(expressions.isEmpty()) {
+            if (((FuncDecl) decl).declList != null)
+                this.error("Too many parameters in call on " + name);
+
+        } else if (expressions.size() != ((FuncDecl) decl).declList.parameters.size()) {
+            this.error("Too many parameters in call on " + name);
+        } else {
+            for (int i = 0; i < expressions.size(); i++) {
+                Expression exp = expressions.get(i);
+                ParamDecl pd = ((FuncDecl) decl).declList.parameters.get(i);
+                exp.type.checkType(pd.type, "parameter", this, "Parameter type mismatch");
+            }
+        }
     }
 }

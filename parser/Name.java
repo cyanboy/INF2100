@@ -12,7 +12,6 @@ import types.*;
 public class Name extends UnsignedConstant {
     String name;
     PascalDecl decl;
-    types.Type type;
 
     public Name(int lNum) {
         super(lNum);

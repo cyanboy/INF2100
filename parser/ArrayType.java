@@ -13,7 +13,7 @@ public class ArrayType extends Type {
         super(n);
     }
 
-    Type type;
+    Type pType;
     Constant a, b;
 
     static ArrayType parse(Scanner s) {
@@ -32,7 +32,7 @@ public class ArrayType extends Type {
 
         s.skip(TokenKind.rightBracketToken);
         s.skip(TokenKind.ofToken);
-        at.type = Type.parse(s);
+        at.pType = Type.parse(s);
 
         leaveParser("array-type");
         return at;
@@ -40,9 +40,12 @@ public class ArrayType extends Type {
 
     @Override
     void check(Block curScope, Library library) {
-        type.check(curScope, library);
+        pType.check(curScope, library);
         a.check(curScope, library);
         b.check(curScope, library);
+        a.type.checkType(b.type, "..", this, "");
+
+        type = new types.ArrayType(pType.type, a.type, a.constval, b.constval);
     }
 
     @Override
@@ -52,7 +55,7 @@ public class ArrayType extends Type {
         Main.log.prettyPrint(" .. ");
         b.prettyPrint();
         Main.log.prettyPrint("] of ");
-        type.prettyPrint();
+        pType.prettyPrint();
     }
 
     @Override

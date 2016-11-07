@@ -45,6 +45,8 @@ public class Negation extends Factor {
 
     @Override
     public void check(Block curScope, Library library) {
+
         factor.check(curScope, library);
+        factor.type.checkType(library.booleanType, "not", this, "Factor isn't a boolean, can't be negated");
     }
 }

@@ -29,6 +29,7 @@ public class TypeName extends Type {
     @Override
     void check(Block curScope, Library library) {
         decl = library.findDecl(name, this);
+        type = decl.type;
     }
 
     @Override

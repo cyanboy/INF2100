@@ -2,6 +2,7 @@ package parser;
 
 import main.CodeFile;
 import scanner.Scanner;
+import scanner.TokenKind;
 import types.*;
 
 import java.util.ArrayList;
@@ -45,6 +46,20 @@ public class Term extends PascalSyntax {
             f.check(curScope, library);
         }
 
+        type = factors.get(0).type;
+
+        if(!factorOprs.isEmpty()){
+
+            for(int i = 0; i < factorOprs.size(); i+=2) {
+                FactorOpr op = factorOprs.get(i);
+                if (op.op == TokenKind.andToken) {
+                    type.checkType(library.booleanType, op.op.toString(), this, "Type mismatch, expected Boolean");
+                }
+                type.checkType(factors.get(i).type, op.op.toString(), this, "Type mismatch");
+                type.checkType(factors.get(i+1).type, op.op.toString(), this, "Type mismatch");
+            }
+
+        }
 
     }
 

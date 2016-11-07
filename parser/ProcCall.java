@@ -56,6 +56,27 @@ public class ProcCall extends Statement {
         decl.checkWhetherProcedure(this);
 
         expressions.forEach(expression -> expression.check(curScope, library));
+
+        if (name.equals("write")) {
+            expressions.forEach(e -> {
+                if (e.type instanceof types.ArrayType) {
+                    this.error("write can't print array");
+                }
+            });
+
+        } else if(expressions.isEmpty()) {
+            if (((ProcDecl) decl).declList != null)
+                this.error("Too many parameters in call on " + name);
+
+        } else if (expressions.size() != ((ProcDecl) decl).declList.parameters.size()) {
+            this.error("Too many parameters in call on " + name);
+        } else {
+            for (int i = 0; i < expressions.size(); i++) {
+                Expression exp = expressions.get(i);
+                ParamDecl pd = ((ProcDecl) decl).declList.parameters.get(i);
+                pd.type.checkType(exp.type, "parameter", this, "Parameter type mismatch");
+            }
+        }
     }
 
     @Override

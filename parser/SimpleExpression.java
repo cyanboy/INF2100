@@ -5,6 +5,7 @@ import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
 import types.*;
+import types.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +46,31 @@ public class SimpleExpression extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library library) {
-        if (prefixOpr != null)
-            prefixOpr.check(curScope, library);
-
         term.forEach(t -> t.check(curScope, library));
-
         termOpr.forEach(tOp -> tOp.check(curScope, library));
+
+        if (prefixOpr != null) {
+            prefixOpr.check(curScope, library);
+            term.get(0).type.checkType(library.integerType, prefixOpr.op.toString(), this, "expected integer");
+            type = library.integerType;
+        } else {
+            type = term.get(0).type;
+        }
+
+        if(!termOpr.isEmpty()) {
+
+            for(int i = 0; i < termOpr.size(); i++) {
+                String op = termOpr.get(i).op.toString();
+                Type type2 = term.get(i+1).type;
+
+                if (op.equals("or")) {
+                    type.checkType(library.booleanType, op, this, "Expected boolean");
+                }
+
+                type2.checkType(type, op, this, "Type mismatch");
+
+            }
+        }
     }
 
     public void genCode(CodeFile codeFile) {
@@ -69,7 +89,7 @@ public class SimpleExpression extends PascalSyntax {
 
         term.get(0).prettyPrint();
 
-        if(termOpr != null) {
+        if(!termOpr.isEmpty()) {
             
             for(int i = 0; i < termOpr.size(); i++) {
                 termOpr.get(i).prettyPrint();

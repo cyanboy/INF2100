@@ -10,11 +10,11 @@ public class Expression extends PascalSyntax {
         super(lNum);
     }
 
-    types.Type type;
-
     SimpleExpression expr0;
     RelOpr relOpr;
     SimpleExpression expr1;
+
+    types.Type type;
 
     static Expression parse(Scanner s) {
         enterParser("expression");
@@ -41,10 +41,16 @@ public class Expression extends PascalSyntax {
 
     void check(Block curScope, Library library) {
         expr0.check(curScope, library);
+        type = expr0.type;
 
         if (relOpr != null) {
             relOpr.check(curScope, library);
             expr1.check(curScope, library);
+            String op = relOpr.kind.toString();
+
+            type.checkType(expr1.type, op, this, "Operands to " + op + " are of different type!");
+
+            type = library.booleanType;
         }
     }
 

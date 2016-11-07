@@ -10,9 +10,9 @@ import types.Type;
  */
 public class Library extends Block {
     class TypeDecl extends PascalDecl {
-
-        public TypeDecl(String id, int lNum) {
+        public TypeDecl(String id, int lNum, Type t) {
             super(id, lNum);
+            type = t;
         }
 
         @Override
@@ -58,23 +58,29 @@ public class Library extends Block {
                 return "<const decl> " + this.name + " in the library";
             }
         });
-        addDecl("true", new ConstDecl("true", lnum) {
+
+        ConstDecl trueD = new ConstDecl("true", lnum) {
             @Override
             public String identify() {
                 return "<const decl> " + this.name + " in the library";
             }
-        });
+        };
+        trueD.type = booleanType;
 
 
-        addDecl("false", new ConstDecl("false", lnum) {
+        ConstDecl falseD = new ConstDecl("false", lnum) {
             @Override
             public String identify() {
                 return "<const decl> " + this.name + " in the library";
             }
-        });
+        };
+        falseD.type = booleanType;
 
-        addDecl("integer", new TypeDecl("integer", lnum));
-        addDecl("char", new TypeDecl("char", lnum));
-        addDecl("boolean", new TypeDecl("boolean", lnum));
+        addDecl("true", trueD);
+        addDecl("false", falseD);
+
+        addDecl("integer", new TypeDecl("integer", lnum, integerType));
+        addDecl("char", new TypeDecl("char", lnum, charType));
+        addDecl("boolean", new TypeDecl("boolean", lnum, booleanType));
     }
 }

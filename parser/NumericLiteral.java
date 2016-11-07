@@ -15,7 +15,6 @@ public class NumericLiteral extends UnsignedConstant {
     }
 
     int val;
-    types.Type type = new IntType();
 
     static NumericLiteral parse(Scanner s) {
         enterParser("numeric literal");
@@ -31,7 +30,7 @@ public class NumericLiteral extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library library) {
-        return;
+        type = library.integerType;
     }
 
     @Override

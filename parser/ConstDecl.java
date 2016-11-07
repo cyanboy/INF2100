@@ -3,6 +3,7 @@ package parser;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 /**
  * Created by cyanboy on 19/10/15.
@@ -17,7 +18,6 @@ public class ConstDecl extends PascalDecl {
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
         where.error("A constant is not assignable");
-
     }
 
     @Override
@@ -53,6 +53,7 @@ public class ConstDecl extends PascalDecl {
     @Override
     void check(Block curScope, Library lib) {
         constant.check(curScope, lib);
+        type = constant.type;
     }
 
     @Override

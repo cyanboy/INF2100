@@ -3,11 +3,14 @@ package parser;
 import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
+import types.*;
 
 /**
  * Created by cyanboy on 20/10/15.
  */
 public abstract class Factor extends PascalSyntax {
+    types.Type type;
+
     @Override
     public String identify() {
         return null;

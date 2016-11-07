@@ -11,7 +11,7 @@ import types.*;
  */
 public class CharLiteral extends UnsignedConstant {
     char constant;
-    types.Type type = new CharType();
+//    types.Type type = new CharType();
 
     public CharLiteral(int lNum) {
         super(lNum);
@@ -44,7 +44,7 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library library) {
-
+        type = library.charType;
     }
 
     @Override

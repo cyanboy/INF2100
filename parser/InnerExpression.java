@@ -48,5 +48,6 @@ public class InnerExpression extends Factor {
     @Override
     public void check(Block curScope, Library library) {
         exp.check(curScope, library);
+        this.type = exp.type;
     }
 }
