@@ -80,7 +80,7 @@ public class FuncCall extends Factor {
             f.genInstr("", "pushl", "%eax", "");
         }
 
-        f.genInstr("", "call", String.format("func$%s", name), "");
+        f.genInstr("", "call", String.format("func$%s", f.getLabel(name)), "");
         f.genInstr("", "addl", "$" + 4 * expressions.size() + ",%esp", "");
     }
 
