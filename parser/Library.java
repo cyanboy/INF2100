@@ -76,6 +76,8 @@ public class Library extends Block {
             }
         };
         trueD.type = booleanType;
+        trueD.constant = new Constant(-1);
+        trueD.constant.constval = 1;
 
 
         ConstDecl falseD = new ConstDecl("false", lnum) {
@@ -85,6 +87,8 @@ public class Library extends Block {
             }
         };
         falseD.type = booleanType;
+        falseD.constant = new Constant(-1);
+        falseD.constant.constval = 0;
 
         addDecl("true", trueD);
         addDecl("false", falseD);

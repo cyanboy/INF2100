@@ -54,7 +54,15 @@ public class Expression extends PascalSyntax {
         }
     }
 
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
+        expr0.genCode(f);
+
+        if (relOpr != null) {
+            f.genInstr("", "pushl", "%eax", "");
+            expr1.genCode(f);
+            relOpr.genCode(f);
+
+        }
 
     }
 

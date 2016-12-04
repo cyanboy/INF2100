@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -60,6 +61,11 @@ public class ParamDecl extends PascalDecl {
     void check(Block curScope, Library lib) {
         typeName.check(curScope, lib);
         type = typeName.type;
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

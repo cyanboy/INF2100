@@ -39,7 +39,8 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     public void genCode(CodeFile codeFile) {
-
+        // cast to int
+        codeFile.genInstr("", "movl", "$" + (int) constant + ",%eax", "");
     }
 
     @Override

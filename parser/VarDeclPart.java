@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -21,6 +22,11 @@ public class VarDeclPart extends PascalSyntax {
     @Override
     void check(Block curScope, Library lib) {
         variables.forEach(v -> v.check(curScope, lib));
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     static VarDeclPart parse(Scanner s) {

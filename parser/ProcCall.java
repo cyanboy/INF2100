@@ -4,6 +4,7 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,8 +47,38 @@ public class ProcCall extends Statement {
     }
 
     @Override
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
 
+        if (!name.equals("write")) {
+
+            for (int i = expressions.size() - 1; i >= 0; --i) {
+                expressions.get(i).genCode(f);
+                f.genInstr("", "pushl", "%eax", "");
+            }
+
+            f.genInstr("", "call", "proc$" + name, "");
+
+            if (expressions.size() > 0)
+                f.genInstr("", "addl", "$" + 4 * expressions.size() + ",%esp", "");
+
+        } else  {
+            for (Expression exp : expressions) {
+                exp.genCode(f);
+                f.genInstr("", "pushl", "%eax", "");
+
+                if (exp.type instanceof types.IntType) {
+                    f.genInstr("", "call", "write_int", "");
+
+                } else if (exp.type instanceof types.CharType) {
+                    f.genInstr("", "call", "write_char", "");
+
+                } else { //must be boolean
+                    f.genInstr("", "call", "write_bool", "");
+                }
+
+                f.genInstr("", "addl", "$4, %esp", "");
+            }
+        }
     }
 
     @Override
@@ -64,7 +95,7 @@ public class ProcCall extends Statement {
                 }
             });
 
-        } else if(expressions.isEmpty()) {
+        } else if (expressions.isEmpty()) {
             if (((ProcDecl) decl).declList != null)
                 this.error("Too many parameters in call on " + name);
 

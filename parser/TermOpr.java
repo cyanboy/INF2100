@@ -1,7 +1,9 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
+import scanner.TokenKind;
 
 /**
  * Created by cyanboy on 21/10/15.
@@ -14,6 +16,20 @@ public class TermOpr extends Operator {
     @Override
     void check(Block curScope, Library lib) {
 
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+        f.genInstr("", "movl", "%eax, %ecx", "");
+        f.genInstr("", "popl", "%eax", "");
+
+        if (op == TokenKind.addToken) {
+            f.genInstr("", "addl", "%ecx, %eax", "");
+        } else if (op == TokenKind.subtractToken) {
+            f.genInstr("", "subl", "%ecx, %eax", "");
+        } else { // OR
+            f.genInstr("", "orl", "%ecx, %eax", "");
+        }
     }
 
     static TermOpr parse(Scanner s) {

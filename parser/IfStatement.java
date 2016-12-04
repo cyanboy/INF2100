@@ -36,7 +36,25 @@ public class IfStatement extends Statement {
     }
 
     @Override
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
+        String lab1 = f.getLocalLabel();
+        String lab2 = body1 != null ? f.getLocalLabel() : "";
+
+        exp.genCode(f);
+        f.genInstr("", "cmpl", "$0, %eax", "");
+        f.genInstr("", "je", lab1, "");
+        body0.genCode(f);
+
+        if (!lab2.isEmpty())
+            f.genInstr("", "jmp", lab2, "");
+
+        f.genInstr(lab1, "", "", "");
+
+        if (!lab2.isEmpty()) {
+            body1.genCode(f);
+            f.genInstr(lab2, "", "", "");
+        }
+
 
     }
 

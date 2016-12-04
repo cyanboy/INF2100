@@ -1,7 +1,9 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
+import scanner.TokenKind;
 
 /**
  * Created by cyanboy on 20/10/15.
@@ -14,6 +16,12 @@ public class PrefixOpr extends Operator {
     @Override
     void check(Block curScope, Library lib) {
 
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+        if (op == TokenKind.subtractToken)
+            f.genInstr("", "negl", "%eax", "");
     }
 
     static PrefixOpr parse(Scanner s) {

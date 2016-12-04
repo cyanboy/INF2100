@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.Token;
@@ -36,6 +37,11 @@ public class ArrayType extends Type {
 
         leaveParser("array-type");
         return at;
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

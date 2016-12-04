@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -54,6 +55,11 @@ public class ConstDecl extends PascalDecl {
     void check(Block curScope, Library lib) {
         constant.check(curScope, lib);
         type = constant.type;
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

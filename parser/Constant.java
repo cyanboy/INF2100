@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import scanner.Scanner;
 import scanner.TokenKind;
 import types.*;
@@ -9,6 +10,10 @@ import types.*;
  * Created by cyanboy on 16/10/2016.
  */
 public class Constant extends PascalSyntax {
+    @Override
+    public void genCode(CodeFile f) {
+        
+    }
 
     PrefixOpr prefixOpr;
     UnsignedConstant uc;

@@ -36,7 +36,8 @@ public class Name extends UnsignedConstant {
 
     @Override
     public void genCode(CodeFile codeFile) {
-
+        int value = ((ConstDecl) decl).constant.constval;
+        codeFile.genInstr("", "movl", String.format("$%d, %eax", value), "");
     }
 
     @Override

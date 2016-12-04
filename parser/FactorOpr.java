@@ -1,7 +1,9 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
+import scanner.TokenKind;
 
 public class FactorOpr extends Operator {
     public FactorOpr(int n) {
@@ -11,6 +13,25 @@ public class FactorOpr extends Operator {
     @Override
     void check(Block curScope, Library lib) {
 
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+        f.genInstr("", "movl", "%eax, %ecx", "");
+        f.genInstr("", "popl ", "%eax", "");
+
+        if (op == TokenKind.multiplyToken) {
+            f.genInstr("", "imull", "%ecx, %eax", "");
+
+        } else if (op == TokenKind.divToken || op == TokenKind.modToken) {
+            f.genInstr("", "cdq", "", "");
+            f.genInstr("", "idivl", "%ecx", "");
+
+            if (op == TokenKind.modToken)
+                f.genInstr("", "movl", "%edx, %eax", "");
+        } else if (op == TokenKind.andToken){
+            f.genInstr("", "andl", "%ecx, %eax", "");
+        }
     }
 
     static FactorOpr parse(Scanner s) {

@@ -118,7 +118,7 @@ public class Main {
         if (log.doLogPrettyPrint)
             prog.prettyPrint();
 
-        library = new Library(-1);
+        library = new Library();
         prog.check(library, library);
     }
 
@@ -143,7 +143,7 @@ public class Main {
         code.finish();
         System.out.println("OK");
 
-        assembleCode();
+        //assembleCode();
     }
 
 

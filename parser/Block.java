@@ -56,12 +56,6 @@ public class Block extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-        for (FuncDecl fd : funcDeclList)
-            fd.genCode(f);
-
-        for (ProcDecl pd : procDeclList)
-            pd.genCode(f);
-
         statementList.genCode(f);
     }
 

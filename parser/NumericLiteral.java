@@ -34,8 +34,8 @@ public class NumericLiteral extends UnsignedConstant {
     }
 
     @Override
-    public void genCode(CodeFile codeFile) {
-        codeFile.genInstr("", "movl", "$" + val + ",%eax", "");
+    public void genCode(CodeFile f) {
+        f.genInstr("", "movl", "$" + val + ",%eax", "");
     }
 
     @Override

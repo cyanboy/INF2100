@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -58,6 +59,11 @@ public class VarDecl extends PascalDecl {
 
         leaveParser("var decl");
         return v;
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     public void check(Block curScope, Library library) {

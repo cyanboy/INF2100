@@ -39,7 +39,23 @@ public class AssignStatement extends Statement {
     }
 
     @Override
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
+        exp.genCode(f);
+
+        if (var.decl instanceof FuncDecl) {
+            // movl −4(b + 1)(%ebp),%edx
+            // movl %eax,-32(%edx)
+
+            f.genInstr("", "movl", "-4(" + var.decl.declLevel + 1 + ")(%ebp), %edx", "");
+            f.genInstr("", "movl", "%eax, -32(%edx)", "");
+
+        } else {
+            // movl −4b(%ebp),%edx
+            // movl %eax,o(%edx)
+
+            f.genInstr("", "movl", -4 * var.decl.declLevel + "(%ebp),%edx", "");
+            f.genInstr("", "movl", "%eax," + var.decl.declOffset + "(%edx)", "");
+        }
 
     }
 

@@ -4,7 +4,6 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
-import types.*;
 import types.ArrayType;
 
 /**
@@ -39,15 +38,18 @@ public class Variable extends Factor {
     }
 
     @Override
-    public void genCode(CodeFile codeFile) {
-
+    public void genCode(CodeFile f) {
+        // movl −4b(%ebp),%edx
+        // movl o(%edx),%eax
+        f.genInstr("", "movl", -4 * decl.declLevel + "(%ebp),%edx", "");
+        f.genInstr("", "movl", decl.declOffset + "(%edx),%eax", "");
     }
 
     @Override
     void prettyPrint() {
         Main.log.prettyPrint(name);
 
-        if(exp != null) {
+        if (exp != null) {
             Main.log.prettyPrint("[");
             exp.prettyPrint();
             Main.log.prettyPrint("]");

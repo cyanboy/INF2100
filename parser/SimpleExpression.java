@@ -73,7 +73,25 @@ public class SimpleExpression extends PascalSyntax {
         }
     }
 
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
+        if (!termOpr.isEmpty()) {
+
+            for (int i = 0; i < term.size(); ++i) {
+                term.get(i).genCode(f);
+
+                if (i > 0)
+                    termOpr.get(i - 1).genCode(f);
+
+                if (i < term.size() - 1)
+                    f.genInstr("", "pushl", "%eax", "");
+            }
+
+        } else {
+            term.get(0).genCode(f);
+        }
+
+        if (prefixOpr != null)
+            prefixOpr.genCode(f);
 
     }
 

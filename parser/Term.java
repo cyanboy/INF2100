@@ -3,7 +3,6 @@ package parser;
 import main.CodeFile;
 import scanner.Scanner;
 import scanner.TokenKind;
-import types.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class Term extends PascalSyntax {
 
         t.factors.add(Factor.parse(s));
 
-        while(s.curToken.kind.isFactorOpr()){
+        while (s.curToken.kind.isFactorOpr()) {
             t.factorOprs.add(FactorOpr.parse(s));
             t.factors.add(Factor.parse(s));
         }
@@ -48,22 +47,37 @@ public class Term extends PascalSyntax {
 
         type = factors.get(0).type;
 
-        if(!factorOprs.isEmpty()){
+        if (!factorOprs.isEmpty()) {
 
-            for(int i = 0; i < factorOprs.size(); i+=2) {
+            for (int i = 0; i < factorOprs.size(); i += 2) {
                 FactorOpr op = factorOprs.get(i);
                 if (op.op == TokenKind.andToken) {
                     type.checkType(library.booleanType, op.op.toString(), this, "Type mismatch, expected Boolean");
                 }
                 type.checkType(factors.get(i).type, op.op.toString(), this, "Type mismatch");
-                type.checkType(factors.get(i+1).type, op.op.toString(), this, "Type mismatch");
+                type.checkType(factors.get(i + 1).type, op.op.toString(), this, "Type mismatch");
             }
 
         }
 
     }
 
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
+        if (!factors.isEmpty()) {
+
+            for (int i = 0; i < factors.size(); ++i) {
+                factors.get(i).genCode(f);
+
+                if (i > 0)
+                    factorOprs.get(i - 1).genCode(f);
+
+                if (i < factors.size() - 1)
+                    f.genInstr("", "pushl", "%eax", "");
+            }
+
+        } else {
+            factors.get(0).genCode(f);
+        }
     }
 
     @Override
@@ -75,11 +89,11 @@ public class Term extends PascalSyntax {
     void prettyPrint() {
         factors.get(0).prettyPrint();
 
-        if(!factorOprs.isEmpty()){
+        if (!factorOprs.isEmpty()) {
 
-            for(int i = 0; i < factorOprs.size(); i++) {
+            for (int i = 0; i < factorOprs.size(); i++) {
                 factorOprs.get(i).prettyPrint();
-                factors.get(i+1).prettyPrint();
+                factors.get(i + 1).prettyPrint();
             }
 
         }

@@ -84,6 +84,13 @@ public class Program extends PascalDecl {
         f.genInstr("", "movl", "$0, %eax", "");
         f.genInstr("", "ret", "", "");
 
+        for (FuncDecl fd : progBlock.funcDeclList)
+            fd.genCode(f);
+
+        for (ProcDecl pd : progBlock.procDeclList)
+            pd.genCode(f);
+
+
         f.genInstr(programLabel, "", "", "");
         f.genInstr("", "enter", String.format("$%d, $1", 32 + decls), "");
 

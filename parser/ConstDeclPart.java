@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -17,6 +18,11 @@ public class ConstDeclPart extends PascalSyntax {
     @Override
     void check(Block curScope, Library lib) {
         constants.forEach(c -> c.check(curScope, lib));
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     List<ConstDecl> constants;

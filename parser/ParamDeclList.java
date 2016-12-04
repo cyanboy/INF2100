@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -15,6 +16,11 @@ import java.util.List;
 public class ParamDeclList extends PascalSyntax {
     public ParamDeclList(int n) {
         super(n);
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

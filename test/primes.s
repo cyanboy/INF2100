@@ -1,281 +1,259 @@
-# Code file created by Pascal2016 compiler 2016-05-07 10:58:56
-        .globl  main                    
+# Code file created by Pascal2016 compiler 2016-12-04 21:22:31
+        .globl _main                         
+        .globl main                         
+_main:
 main:
-        call    prog$primes_1           # Start program
-        movl    $0,%eax                 # Set status 0 and
-        ret                             # terminate the program
+        call    prog$primes_1           
+        movl    $0, %eax                
+        ret                             
+prog$primes_1:
+        enter   $40, $1                 
 proc$findprimes_2:
-        enter   $40,$2                  # Start of findprimes
-        movl    $2,%eax                 #   2
-        movl    -8(%ebp),%edx           
-        movl    %eax,-36(%edx)          # i1 :=
+        enter   $40, $2                 
+        movl    $2,%eax                 
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
 .L0003:
-                                        # Start while-statement
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i1
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1000,%eax              #   1000
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setle   %al                     # Test <=
-        cmpl    $0,%eax                 
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setle   %al                     
+        cmpl    $0, %eax                
         je      .L0004                  
-        movl    $2,%eax                 #   2
+        movl    $2,%eax                 
         pushl   %eax                    
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i1
-        movl    %eax,%ecx               
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        movl    %eax, %ecx              
         popl    %eax                    
-        imull   %ecx,%eax               #   *
-        movl    -8(%ebp),%edx           
-        movl    %eax,-40(%edx)          # i2 :=
+        imull   %ecx, %eax              
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
 .L0005:
-                                        # Start while-statement
-        movl    -8(%ebp),%edx           
-        movl    -40(%edx),%eax          #   i2
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1000,%eax              #   1000
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setle   %al                     # Test <=
-        cmpl    $0,%eax                 
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setle   %al                     
+        cmpl    $0, %eax                
         je      .L0006                  
-        movl    $0,%eax                 #   0
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    -8(%ebp),%edx           
-        movl    -40(%edx),%eax          #   i2
-        subl    $2,%eax                 
-        movl    -4(%ebp),%edx           
-        leal    -4028(%edx),%edx        
-        popl    %ecx                    
-        movl    %ecx,0(%edx,%eax,4)     # prime[x] :=
-        movl    -8(%ebp),%edx           
-        movl    -40(%edx),%eax          #   i2
-        pushl   %eax                    
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i1
-        movl    %eax,%ecx               
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        movl    %eax, %ecx              
         popl    %eax                    
-        addl    %ecx,%eax               #   +
-        movl    -8(%ebp),%edx           
-        movl    %eax,-40(%edx)          # i2 :=
+        addl    %ecx, %eax              
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
         jmp     .L0005                  
 .L0006:
-                                        # End while-statement
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i1
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1,%eax                 #   1
-        movl    %eax,%ecx               
+        movl    $1,%eax                 
+        movl    %eax, %ecx              
         popl    %eax                    
-        addl    %ecx,%eax               #   +
-        movl    -8(%ebp),%edx           
-        movl    %eax,-36(%edx)          # i1 :=
+        addl    %ecx, %eax              
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
         jmp     .L0003                  
 .L0004:
-                                        # End while-statement
-        leave                           # End of findprimes
+        leave                           
         ret                             
 proc$p4_7:
-        enter   $32,$2                  # Start of p4
-                                        # Start if-statement
-        movl    -8(%ebp),%edx           
-        movl    8(%edx),%eax            #   x
+        enter   $32, $2                 
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1000,%eax              #   1000
+        movl    $1000,%eax              
         popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setl    %al                     # Test <
-        cmpl    $0,%eax                 
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setl    %al                     
+        cmpl    $0, %eax                
         je      .L0008                  
-        movl    $32,%eax                #   ' '
-        pushl   %eax                    # Push next param.
+        movl    $32,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
+        addl    $4, %esp                
 .L0008:
-                                        # End if-statement
-                                        # Start if-statement
-        movl    -8(%ebp),%edx           
-        movl    8(%edx),%eax            #   x
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $100,%eax               #   100
+        movl    $100,%eax               
         popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setl    %al                     # Test <
-        cmpl    $0,%eax                 
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setl    %al                     
+        cmpl    $0, %eax                
         je      .L0009                  
-        movl    $32,%eax                #   ' '
-        pushl   %eax                    # Push next param.
-        call    write_char              
-        addl    $4,%esp                 # Pop param.
-.L0009:
-                                        # End if-statement
-                                        # Start if-statement
-        movl    -8(%ebp),%edx           
-        movl    8(%edx),%eax            #   x
+        movl    $32,%eax                
         pushl   %eax                    
-        movl    $10,%eax                #   10
-        popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setl    %al                     # Test <
-        cmpl    $0,%eax                 
-        je      .L0010                  
-        movl    $32,%eax                #   ' '
-        pushl   %eax                    # Push next param.
         call    write_char              
-        addl    $4,%esp                 # Pop param.
+        addl    $4, %esp                
+.L0009:
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        pushl   %eax                    
+        movl    $10,%eax                
+        popl    %ecx                    
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setl    %al                     
+        cmpl    $0, %eax                
+        je      .L0010                  
+        movl    $32,%eax                
+        pushl   %eax                    
+        call    write_char              
+        addl    $4, %esp                
 .L0010:
-                                        # End if-statement
-        movl    -8(%ebp),%edx           
-        movl    8(%edx),%eax            #   x
-        pushl   %eax                    # Push next param.
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        pushl   %eax                    
         call    write_int               
-        addl    $4,%esp                 # Pop param.
-        leave                           # End of p4
+        addl    $4, %esp                
+        leave                           
         ret                             
 proc$printprimes_11:
-        enter   $40,$2                  # Start of printprimes
-        movl    $2,%eax                 #   2
-        movl    -8(%ebp),%edx           
-        movl    %eax,-36(%edx)          # i :=
-        movl    $0,%eax                 #   0
-        movl    -8(%ebp),%edx           
-        movl    %eax,-40(%edx)          # nprinted :=
+        enter   $40, $2                 
+        movl    $2,%eax                 
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
+        movl    $0,%eax                 
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
 .L0012:
-                                        # Start while-statement
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1000,%eax              #   1000
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setle   %al                     # Test <=
-        cmpl    $0,%eax                 
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setle   %al                     
+        cmpl    $0, %eax                
         je      .L0013                  
-                                        # Start if-statement
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i
-        subl    $2,%eax                 
-        movl    -4(%ebp),%edx           
-        leal    -4028(%edx),%edx        
-        movl    0(%edx,%eax,4),%eax     #   prime[...]
-        cmpl    $0,%eax                 
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        cmpl    $0, %eax                
         je      .L0014                  
-                                        # Start if-statement
-        movl    -8(%ebp),%edx           
-        movl    -40(%edx),%eax          #   nprinted
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $0,%eax                 #   0
-        popl    %ecx                    
-        cmpl    %eax,%ecx               
         movl    $0,%eax                 
-        setg    %al                     # Test >
+        popl    %ecx                    
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setg    %al                     
         pushl   %eax                    
-        movl    -8(%ebp),%edx           
-        movl    -40(%edx),%eax          #   nprinted
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $10,%eax                #   10
-        movl    %eax,%ecx               
+        movl    $10,%eax                
+        movl    %eax, %ecx              
         popl    %eax                    
         cdq                             
         idivl   %ecx                    
-        movl    %edx,%eax               #   mod
+        movl    %edx, %eax              
         pushl   %eax                    
-        movl    $0,%eax                 #   0
-        popl    %ecx                    
-        cmpl    %eax,%ecx               
         movl    $0,%eax                 
-        sete    %al                     # Test =
-        movl    %eax,%ecx               
+        popl    %ecx                    
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        sete    %al                     
+        movl    %eax, %ecx              
         popl    %eax                    
-        andl    %ecx,%eax               #   and
-        cmpl    $0,%eax                 
+        andl    %ecx, %eax              
+        cmpl    $0, %eax                
         je      .L0015                  
-        movl    $10,%eax                #   10
-        pushl   %eax                    # Push next param.
-        call    write_char              
-        addl    $4,%esp                 # Pop param.
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        pushl   %eax                    
+        call    write_bool              
+        addl    $4, %esp                
 .L0015:
-                                        # End if-statement
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i
-        pushl   %eax                    # Push param #1.
-        call    proc$p4_7               
-        addl    $4,%esp                 # Pop params.
-        movl    -8(%ebp),%edx           
-        movl    -40(%edx),%eax          #   nprinted
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1,%eax                 #   1
-        movl    %eax,%ecx               
+        call    proc$p4                 
+        addl    $4,%esp                 
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        pushl   %eax                    
+        movl    $1,%eax                 
+        movl    %eax, %ecx              
         popl    %eax                    
-        addl    %ecx,%eax               #   +
-        movl    -8(%ebp),%edx           
-        movl    %eax,-40(%edx)          # nprinted :=
+        addl    %ecx, %eax              
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
 .L0014:
-                                        # End if-statement
-        movl    -8(%ebp),%edx           
-        movl    -36(%edx),%eax          #   i
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1,%eax                 #   1
-        movl    %eax,%ecx               
+        movl    $1,%eax                 
+        movl    %eax, %ecx              
         popl    %eax                    
-        addl    %ecx,%eax               #   +
-        movl    -8(%ebp),%edx           
-        movl    %eax,-36(%edx)          # i :=
+        addl    %ecx, %eax              
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
         jmp     .L0012                  
 .L0013:
-                                        # End while-statement
-        movl    $10,%eax                #   10
-        pushl   %eax                    # Push next param.
-        call    write_char              
-        addl    $4,%esp                 # Pop param.
-        leave                           # End of printprimes
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        pushl   %eax                    
+        call    write_bool              
+        addl    $4, %esp                
+        leave                           
         ret                             
-prog$primes_1:
-        enter   $4032,$1                # Start of primes
-        movl    $2,%eax                 #   2
-        movl    -4(%ebp),%edx           
-        movl    %eax,-4032(%edx)        # i :=
+        movl    $2,%eax                 
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
 .L0016:
-                                        # Start while-statement
-        movl    -4(%ebp),%edx           
-        movl    -4032(%edx),%eax        #   i
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    $1000,%eax              #   1000
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         popl    %ecx                    
-        cmpl    %eax,%ecx               
-        movl    $0,%eax                 
-        setle   %al                     # Test <=
-        cmpl    $0,%eax                 
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        setle   %al                     
+        cmpl    $0, %eax                
         je      .L0017                  
-        movl    $1,%eax                 #   1
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
+        movl    0(%ebp),%edx            
+        movl    0(%edx),%eax            
         pushl   %eax                    
-        movl    -4(%ebp),%edx           
-        movl    -4032(%edx),%eax        #   i
-        subl    $2,%eax                 
-        movl    -4(%ebp),%edx           
-        leal    -4028(%edx),%edx        
-        popl    %ecx                    
-        movl    %ecx,0(%edx,%eax,4)     # prime[x] :=
-        movl    -4(%ebp),%edx           
-        movl    -4032(%edx),%eax        #   i
-        pushl   %eax                    
-        movl    $1,%eax                 #   1
-        movl    %eax,%ecx               
+        movl    $1,%eax                 
+        movl    %eax, %ecx              
         popl    %eax                    
-        addl    %ecx,%eax               #   +
-        movl    -4(%ebp),%edx           
-        movl    %eax,-4032(%edx)        # i :=
+        addl    %ecx, %eax              
+        movl    0(%ebp),%edx            
+        movl    %eax,0(%edx)            
         jmp     .L0016                  
 .L0017:
-                                        # End while-statement
-        call    proc$findprimes_2       
-        call    proc$printprimes_11     
-        leave                           # End of primes
+        call    proc$findprimes         
+        addl    $0,%esp                 
+        call    proc$printprimes        
+        addl    $0,%esp                 
+        leave                           
         ret                             
