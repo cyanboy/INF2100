@@ -47,7 +47,7 @@ public class Variable extends Factor {
             int low = ((ArrayType) decl.type).loLim;
 
             if (low > 0)
-                f.genInstr("", "subl", "$" + low + "%eax", "");
+                f.genInstr("", "subl", "$" + low + ",%eax", "");
 
             f.genInstr("", "movl", -4 * decl.declLevel + "(%ebp),%edx", "");
             f.genInstr("", "leal", decl.declOffset + "(%edx), %edx", "");
