@@ -1,4 +1,4 @@
-# Code file created by Pascal2016 compiler 2016-12-04 21:46:57
+# Code file created by Pascal2016 compiler 2016-12-04 22:22:44
         .globl _main                         
         .globl main                         
 _main:

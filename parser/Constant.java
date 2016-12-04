@@ -12,6 +12,7 @@ import types.*;
 public class Constant extends PascalSyntax {
     @Override
     public void genCode(CodeFile f) {
+        f.genInstr("", "movl", "$" + constval + ",%eax", "");
         
     }
 

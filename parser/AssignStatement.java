@@ -46,7 +46,7 @@ public class AssignStatement extends Statement {
             // movl −4(b + 1)(%ebp),%edx
             // movl %eax,-32(%edx)
 
-            f.genInstr("", "movl", "-4(" + var.decl.declLevel + 1 + ")(%ebp), %edx", "");
+            f.genInstr("", "movl", -4 * (var.decl.declLevel + 1) + "(%ebp), %edx", "");
             f.genInstr("", "movl", "%eax, -32(%edx)", "");
 
         } else {

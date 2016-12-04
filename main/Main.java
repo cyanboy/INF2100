@@ -143,7 +143,7 @@ public class Main {
         code.finish();
         System.out.println("OK");
 
-        //assembleCode();
+        assembleCode();
     }
 
 

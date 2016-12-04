@@ -25,10 +25,12 @@ public class ParamDeclList extends PascalSyntax {
 
     @Override
     void check(Block curScope, Library lib) {
-        parameters.forEach(p -> {
+        int counter = 0;
+        for (ParamDecl p : parameters) {
+            p.declOffset = 4 + (++counter * 4);
             curScope.addDecl(p.name, p);
             p.check(curScope, lib);
-        });
+        }
     }
 
     List<ParamDecl> parameters = new ArrayList<>();

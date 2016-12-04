@@ -74,15 +74,14 @@ public class FuncCall extends Factor {
 
     @Override
     public void genCode(CodeFile f) {
-        int numExpr = expressions.size();
 
-        for (int i = numExpr; i - 1 >= 0; --i) {
+        for (int i = expressions.size() - 1; i >= 0; --i) {
             expressions.get(i).genCode(f);
             f.genInstr("", "pushl", "%eax", "");
         }
 
         f.genInstr("", "call", String.format("func$%s", name), "");
-        f.genInstr("", "addl", String.format("$%d, %esp"), "");
+        f.genInstr("", "addl", "$" + 4 * expressions.size() + ",%esp", "");
     }
 
     @Override

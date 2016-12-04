@@ -1,103 +1,105 @@
-# Code file created by Pascal2016 compiler 2016-05-07 10:58:54
-        .globl  main                    
+# Code file created by Pascal2016 compiler 2016-12-04 23:36:56
+        .globl _main                         
+        .globl main                         
+_main:
 main:
-        call    prog$gcd_1              # Start program
-        movl    $0,%eax                 # Set status 0 and
-        ret                             # terminate the program
+        call    prog$gcd_1              
+        movl    $0, %eax                
+        ret                             
 func$gcd_2:
-        enter   $32,$2                  # Start of gcd
-                                        # Start if-statement
+        enter   $32, $2                 
         movl    -8(%ebp),%edx           
-        movl    12(%edx),%eax           #   n
+        movl    12(%edx),%eax           
         pushl   %eax                    
-        movl    $0,%eax                 #   0
-        popl    %ecx                    
-        cmpl    %eax,%ecx               
         movl    $0,%eax                 
-        sete    %al                     # Test =
-        cmpl    $0,%eax                 
+        popl    %ecx                    
+        cmpl    %eax, %ecx              
+        movl    $0, %eax                
+        sete    %al                     
+        cmpl    $0, %eax                
         je      .L0003                  
         movl    -8(%ebp),%edx           
-        movl    8(%edx),%eax            #   m
-        movl    %eax,-32(%ebp)          # gcd :=
+        movl    8(%edx),%eax            
+        movl    -8(%ebp), %edx          
+        movl    %eax, -32(%edx)         
         jmp     .L0004                  
 .L0003:
         movl    -8(%ebp),%edx           
-        movl    8(%edx),%eax            #   m
+        movl    8(%edx),%eax            
         pushl   %eax                    
         movl    -8(%ebp),%edx           
-        movl    12(%edx),%eax           #   n
-        movl    %eax,%ecx               
+        movl    12(%edx),%eax           
+        movl    %eax, %ecx              
         popl    %eax                    
         cdq                             
         idivl   %ecx                    
-        movl    %edx,%eax               #   mod
-        pushl   %eax                    # Push param #2
+        movl    %edx, %eax              
+        pushl   %eax                    
         movl    -8(%ebp),%edx           
-        movl    12(%edx),%eax           #   n
-        pushl   %eax                    # Push param #1
-        call    func$gcd_2              
-        addl    $8,%esp                 # Pop parameters
-        movl    %eax,-32(%ebp)          # gcd :=
+        movl    12(%edx),%eax           
+        pushl   %eax                    
+        call    func$gcd                
+        addl    $8,%esp                 
+        movl    -8(%ebp), %edx          
+        movl    %eax, -32(%edx)         
 .L0004:
-                                        # End if-statement
-        movl    -32(%ebp),%eax          # Fetch return value
-        leave                           # End of gcd
+        movl    -32(%ebp), %eax         
+        leave                           
         ret                             
 prog$gcd_1:
-        enter   $36,$1                  # Start of gcd
-        movl    $462,%eax               #   462
-        pushl   %eax                    # Push param #2
-        movl    $1071,%eax              #   1071
-        pushl   %eax                    # Push param #1
-        call    func$gcd_2              
-        addl    $8,%esp                 # Pop parameters
+        enter   $36, $1                 
+        movl    $462,%eax               
+        pushl   %eax                    
+        movl    $1071,%eax              
+        pushl   %eax                    
+        call    func$gcd                
+        addl    $8,%esp                 
         movl    -4(%ebp),%edx           
-        movl    %eax,-36(%edx)          # res :=
-        movl    $71,%eax                #   'G'
-        pushl   %eax                    # Push next param.
+        movl    %eax,-36(%edx)          
+        movl    $71,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        movl    $67,%eax                #   'C'
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $67,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        movl    $68,%eax                #   'D'
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $68,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        movl    $40,%eax                #   '('
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $40,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        movl    $1071,%eax              #   1071
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $1071,%eax              
+        pushl   %eax                    
         call    write_int               
-        addl    $4,%esp                 # Pop param.
-        movl    $44,%eax                #   ','
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $44,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        movl    $462,%eax               #   462
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $462,%eax               
+        pushl   %eax                    
         call    write_int               
-        addl    $4,%esp                 # Pop param.
-        movl    $41,%eax                #   ')'
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $41,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        movl    $61,%eax                #   '='
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $61,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
+        addl    $4, %esp                
         movl    -4(%ebp),%edx           
-        movl    -36(%edx),%eax          #   res
-        pushl   %eax                    # Push next param.
+        movl    -36(%edx),%eax          
+        pushl   %eax                    
         call    write_int               
-        addl    $4,%esp                 # Pop param.
-        movl    $10,%eax                #   10
-        pushl   %eax                    # Push next param.
+        addl    $4, %esp                
+        movl    $10,%eax                
+        pushl   %eax                    
         call    write_char              
-        addl    $4,%esp                 # Pop param.
-        leave                           # End of gcd
+        addl    $4, %esp                
+        leave                           
         ret                             

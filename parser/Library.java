@@ -62,12 +62,15 @@ public class Library extends Block {
             }
         });
 
-        addDecl("eol", new ConstDecl("eol", lnum) {
+        ConstDecl eolD = new ConstDecl("eol", lnum) {
             @Override
             public String identify() {
                 return "<const decl> " + this.name + " in the library";
             }
-        });
+        };
+        eolD.type = charType;
+        eolD.constant = new Constant(-1);
+        eolD.constant.constval = '\n';
 
         ConstDecl trueD = new ConstDecl("true", lnum) {
             @Override
@@ -92,6 +95,7 @@ public class Library extends Block {
 
         addDecl("true", trueD);
         addDecl("false", falseD);
+        addDecl("eol", eolD);
 
         addDecl("integer", new TypeDecl("integer", lnum, integerType));
         addDecl("char", new TypeDecl("char", lnum, charType));

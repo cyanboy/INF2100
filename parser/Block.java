@@ -37,7 +37,14 @@ public class Block extends PascalSyntax {
         }
 
         if (varDeclPart != null) {
-            varDeclPart.variables.forEach(varDecl -> addDecl(varDecl.name, varDecl));
+
+            int counter = 0;
+
+            for (VarDecl varDecl : varDeclPart.variables) {
+                addDecl(varDecl.name, varDecl);
+                varDecl.declOffset = -32 -(++counter * 4);
+            }
+
             varDeclPart.check(this, lib);
         }
 
@@ -62,6 +69,7 @@ public class Block extends PascalSyntax {
     public void addDecl(String id, PascalDecl d) {
         if (decls.containsKey(id))
             d.error(id + " declared twice in same block!");
+        d.declLevel = this.declLevel;
         decls.put(id, d);
     }
 
@@ -69,6 +77,7 @@ public class Block extends PascalSyntax {
         PascalDecl d = decls.get(id);
         if (d != null) {
             Main.log.noteBinding(id, where, d);
+            d.declLevel = this.declLevel;
             return d;
         }
         if (outerScope != null)

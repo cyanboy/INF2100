@@ -43,6 +43,7 @@ public class IfStatement extends Statement {
         exp.genCode(f);
         f.genInstr("", "cmpl", "$0, %eax", "");
         f.genInstr("", "je", lab1, "");
+
         body0.genCode(f);
 
         if (!lab2.isEmpty())
