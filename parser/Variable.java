@@ -39,12 +39,21 @@ public class Variable extends Factor {
 
     @Override
     public void genCode(CodeFile f) {
-        // movl −4b(%ebp),%edx
-        // movl o(%edx),%eax
         if (decl instanceof ConstDecl) {
             int value = ((ConstDecl) decl).constant.constval;
             f.genInstr("", "movl", "$" + value + ",%eax", "");
-        } else {
+        } else if (exp != null) {
+            exp.genCode(f);
+            int low = ((ArrayType) decl.type).loLim;
+
+            if (low > 0)
+                f.genInstr("", "subl", "$" + low + "%eax", "");
+
+            f.genInstr("", "movl", -4 * decl.declLevel + "(%ebp),%edx", "");
+            f.genInstr("", "leal", decl.declOffset + "(%edx), %edx", "");
+            f.genInstr("", "movl", "(%edx,%eax,4),%eax", "");
+
+        }else {
             f.genInstr("", "movl", -4 * decl.declLevel + "(%ebp),%edx", "");
             f.genInstr("", "movl", decl.declOffset + "(%edx),%eax", "");
         }

@@ -4,6 +4,8 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
+import types.ArrayType;
 
 /**
  * Created by cyanboy on 16/10/15.
@@ -49,12 +51,24 @@ public class AssignStatement extends Statement {
             f.genInstr("", "movl", -4 * (var.decl.declLevel + 1) + "(%ebp), %edx", "");
             f.genInstr("", "movl", "%eax, -32(%edx)", "");
 
-        } else {
+        } else if (var.decl instanceof VarDecl){
             // movl −4b(%ebp),%edx
             // movl %eax,o(%edx)
 
             f.genInstr("", "movl", -4 * var.decl.declLevel + "(%ebp),%edx", "");
             f.genInstr("", "movl", "%eax," + var.decl.declOffset + "(%edx)", "");
+        } else {
+            f.genInstr("", "pushl", "%eax", "");
+            var.exp.genCode(f);
+
+            int low = ((ArrayType) var.decl.type).loLim;
+            if (low > 0)
+                f.genInstr("", "subl", "$" + low + ",%eax", "");
+
+            f.genInstr("", "movl", -4 * var.decl.declLevel + "(%ebp),%edx", "");
+            f.genInstr("", "leal", var.decl.declOffset + "(%edx),%edx", "");
+            f.genInstr("", "popl", "%ecx", "");
+            f.genInstr("", "movl", "%ecx,(%edx,%eax,4)", "");
         }
 
     }
