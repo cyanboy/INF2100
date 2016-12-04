@@ -56,7 +56,7 @@ public class ProcCall extends Statement {
                 f.genInstr("", "pushl", "%eax", "");
             }
 
-            f.genInstr("", "call", "proc$" + name, "");
+            f.genInstr("", "call", "proc$" + decl.progProcFuncName, "");
 
             if (expressions.size() > 0)
                 f.genInstr("", "addl", "$" + 4 * expressions.size() + ",%esp", "");

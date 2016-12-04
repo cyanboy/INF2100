@@ -62,7 +62,7 @@ public class FuncDecl extends PascalDecl {
 
     @Override
     public void genCode(CodeFile f) {
-        String funcLabel = f.getLabel(name);
+        progProcFuncName = f.getLabel(name);
 
         for (FuncDecl fd : body.funcDeclList)
             fd.genCode(f);
@@ -70,7 +70,7 @@ public class FuncDecl extends PascalDecl {
         for (ProcDecl pd : body.procDeclList)
             pd.genCode(f);
 
-        f.genInstr(String.format("func$%s", funcLabel), "", "", "");
+        f.genInstr(String.format("func$%s", progProcFuncName), "", "", "");
         int decls = 0;
 
         if (body.varDeclPart != null)

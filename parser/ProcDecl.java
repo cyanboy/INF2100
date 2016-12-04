@@ -35,7 +35,7 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     public void genCode(CodeFile f) {
-        String procLabel = f.getLabel(name);
+        progProcFuncName = f.getLabel(name);
 
         for (FuncDecl fd : block.funcDeclList)
             fd.genCode(f);
@@ -43,7 +43,7 @@ public class ProcDecl extends PascalDecl {
         for (ProcDecl pd : block.procDeclList)
             pd.genCode(f);
 
-        f.genInstr(String.format("proc$%s", procLabel), "", "", "");
+        f.genInstr(String.format("proc$%s", progProcFuncName), "", "", "");
         int decls = 0;
 
         if (block.varDeclPart != null)
