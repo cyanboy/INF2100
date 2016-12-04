@@ -44,7 +44,21 @@ public class WhileStatement extends Statement {
         return w;
     }
 
-    public void genCode(CodeFile codeFile) {
+    public void genCode(CodeFile f) {
+        String lab1 = f.getLocalLabel(),
+                lab2 = f.getLocalLabel();
+
+        f.genInstr(lab1, "", "", "");
+        expr.genCode(f);
+
+        f.genInstr("", "cmpl", "$0, %eax", "");
+        f.genInstr("", "je", lab2, "");
+
+        body.genCode(f);
+
+        f.genInstr("", "jmp", lab1, "");
+
+        f.genInstr(lab2, "", "", "");
     }
 
     public void check(Block curScope, Library library) {

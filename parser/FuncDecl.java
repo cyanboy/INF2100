@@ -60,6 +60,25 @@ public class FuncDecl extends PascalDecl {
     }
 
 
+    @Override
+    public void genCode(CodeFile f) {
+        String funcLabel = f.getLabel(name);
+        f.genInstr(String.format("func$%s", funcLabel), "", "", "");
+        int decls = 0;
+
+        if (body.varDeclPart != null)
+            decls = 4 * body.varDeclPart.variables.size();
+
+        f.genInstr("", "enter", String.format("$%d, $%d", 32 + decls, body.declLevel), "");
+
+        body.genCode(f);
+
+        f.genInstr("", "movl", "-32(%ebp), %eax", "");
+
+        f.genInstr("", "leave", "", "");
+        f.genInstr("", "ret", "", "");
+    }
+
     void check(Block curScope, Library library) {
         if (declList != null)
             declList.check(body, library);

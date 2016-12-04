@@ -40,9 +40,8 @@ public class Main {
 
             else if (testChecker)
                 doTestChecker(s);
-            // Del 4:
-            // else
-            //     doRunRealCompiler(s);
+            else
+                doRunRealCompiler(s);
         } catch (PascalError e) {
             System.out.println();
             System.err.println(e.getMessage());
@@ -124,29 +123,28 @@ public class Main {
     }
 
 
-    /* Del 4:
     private static void doRunRealCompiler(Scanner s) {
-	System.out.print("Parsing...");
-	Program prog = Program.parse(s);
-	if (s.curToken.kind != eofToken) 
-	    error("Scanner error: Garbage after the program!");
+        System.out.print("Parsing...");
+        Program prog = Program.parse(s);
+        if (s.curToken.kind != eofToken)
+            error("Scanner error: Garbage after the program!");
 
-	if (log.doLogPrettyPrint)
-	    prog.prettyPrint();
-	
-	System.out.print(" checking...");
-	library = new Library();
-	prog.check(library, library);
+        if (log.doLogPrettyPrint)
+            prog.prettyPrint();
 
-	System.out.print(" generating code...");
-	CodeFile code = new CodeFile(baseFileName+".s");
-	library.genCode(code);  prog.genCode(code);
-	code.finish();
-	System.out.println("OK");
+        System.out.print(" checking...");
+        library = new Library();
+        prog.check(library, library);
 
-	assembleCode();
+        System.out.print(" generating code...");
+        CodeFile code = new CodeFile(baseFileName + ".s");
+        library.genCode(code);
+        prog.genCode(code);
+        code.finish();
+        System.out.println("OK");
+
+        assembleCode();
     }
-    */
 
 
     private static void assembleCode() {

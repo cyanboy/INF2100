@@ -1,6 +1,7 @@
 package parser;
 
 
+import main.CodeFile;
 import types.*;
 import types.ArrayType;
 import types.Type;
@@ -9,6 +10,11 @@ import types.Type;
  * Created by cyanboy on 16/10/2016.
  */
 public class Library extends Block {
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     class TypeDecl extends PascalDecl {
         public TypeDecl(String id, int lNum, Type t) {
             super(id, lNum);
@@ -30,6 +36,9 @@ public class Library extends Block {
         void check(Block curScope, Library lib) {}
 
         @Override
+        public void genCode(CodeFile f) {}
+
+        @Override
         public String identify() {
             return "<type decl> " + name + " in the library";
         }
@@ -42,8 +51,9 @@ public class Library extends Block {
     types.Type integerType = new types.IntType();
     types.Type charType = new types.CharType();
 
-    public Library(int lnum) {
-        super(lnum);
+    public Library() {
+        super(-1);
+        int lnum = -1;
 
         addDecl("write", new ProcDecl("write", lnum) {
             @Override

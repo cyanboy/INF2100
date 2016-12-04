@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -51,6 +52,17 @@ public class Block extends PascalSyntax {
         });
 
         statementList.check(this, lib);
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+        for (FuncDecl fd : funcDeclList)
+            fd.genCode(f);
+
+        for (ProcDecl pd : procDeclList)
+            pd.genCode(f);
+
+        statementList.genCode(f);
     }
 
     public void addDecl(String id, PascalDecl d) {

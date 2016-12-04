@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.TokenKind;
 import scanner.Scanner;
@@ -63,6 +64,34 @@ public class Program extends PascalDecl {
     @Override
     public void check(Block curScope, Library lib) {
         progBlock.check(curScope, lib);
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+        String programLabel = String.format("prog$%s", f.getLabel(name));
+        int decls = 0;
+
+        if (progBlock.varDeclPart != null)
+            decls = 4 * progBlock.varDeclPart.variables.size();
+
+        f.genInstr("", ".globl _main", "", "");
+        f.genInstr("", ".globl main", "", "");
+
+        f.genInstr("_main", "", "", "");
+        f.genInstr("main", "", "", "");
+
+        f.genInstr("", "call", programLabel, "");
+        f.genInstr("", "movl", "$0, %eax", "");
+        f.genInstr("", "ret", "", "");
+
+        f.genInstr(programLabel, "", "", "");
+        f.genInstr("", "enter", String.format("$%d, $1", 32 + decls), "");
+
+        progBlock.genCode(f);
+
+        f.genInstr("", "leave", "", "");
+        f.genInstr("", "ret", "", "");
+
     }
 
     @Override

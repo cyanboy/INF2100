@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
@@ -26,10 +27,16 @@ public class StatementList extends PascalSyntax {
         }
     }
 
+    @Override
+    public void genCode(CodeFile f) {
+        for (Statement s : statements) {
+            s.genCode(f);
+        }
+    }
+
     public static StatementList parse(Scanner s) {
         enterParser("statm list");
         StatementList sl = new StatementList(s.curLineNum());
-
 
         sl.statements.add(Statement.parse(s));
 

@@ -33,6 +33,24 @@ public class ProcDecl extends PascalDecl {
         Main.error(lineNum, name + " is a procedure, not a value");
     }
 
+    @Override
+    public void genCode(CodeFile f) {
+        String procLabel = f.getLabel(name);
+
+        f.genInstr(String.format("proc$%s", procLabel), "", "", "");
+        int decls = 0;
+
+        if (block.varDeclPart != null)
+            decls = 4 * block.varDeclPart.variables.size();
+
+        f.genInstr("", "enter", String.format("$%d, $%d", 32 + decls, block.declLevel), "");
+
+        block.genCode(f);
+
+        f.genInstr("", "leave", "", "");
+        f.genInstr("", "ret", "", "");
+    }
+
     //String name;
     ParamDeclList declList;
     Block block;
