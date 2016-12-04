@@ -59,10 +59,12 @@ public class AssignStatement extends Statement {
             f.genInstr("", "movl", "%eax," + var.decl.declOffset + "(%edx)", "");
         } else {
             f.genInstr("", "pushl", "%eax", "");
+
             var.exp.genCode(f);
 
             int low = ((ArrayType) var.decl.type).loLim;
-            if (low > 0)
+
+            if (low != 0)
                 f.genInstr("", "subl", "$" + low + ",%eax", "");
 
             f.genInstr("", "movl", -4 * var.decl.declLevel + "(%ebp),%edx", "");

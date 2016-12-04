@@ -46,11 +46,11 @@ public class Variable extends Factor {
             exp.genCode(f);
             int low = ((ArrayType) decl.type).loLim;
 
-            if (low > 0)
+            if (low != 0)
                 f.genInstr("", "subl", "$" + low + ",%eax", "");
 
             f.genInstr("", "movl", -4 * decl.declLevel + "(%ebp),%edx", "");
-            f.genInstr("", "leal", decl.declOffset + "(%edx), %edx", "");
+            f.genInstr("", "leal", decl.declOffset + "(%edx),%edx", "");
             f.genInstr("", "movl", "(%edx,%eax,4),%eax", "");
 
         }else {
