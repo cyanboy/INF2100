@@ -61,13 +61,14 @@ public class SimpleExpression extends PascalSyntax {
 
             for(int i = 0; i < termOpr.size(); i++) {
                 String op = termOpr.get(i).op.toString();
-                Type type2 = term.get(i+1).type;
+                //Type type2 = term.get(i+1).type;
 
                 if (op.equals("or")) {
                     type.checkType(library.booleanType, op, this, "Expected boolean");
                 }
 
-                type2.checkType(type, op, this, "Type mismatch");
+                type.checkType(term.get(i).type, op, this, "Type mismatch");
+                type.checkType(term.get(i + 1).type, op, this, "Type mismatch");
 
             }
         }
