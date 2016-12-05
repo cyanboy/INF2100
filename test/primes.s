@@ -1,4 +1,4 @@
-# Code file created by Pascal2016 compiler 2016-12-05 01:30:11
+# Code file created by Pascal2016 compiler 2016-12-05 01:36:44
         .globl _main                         
         .globl main                         
 _main:
@@ -227,10 +227,10 @@ prog$primes_1:
         enter   $40, $1                 
         movl    $2,%eax                 
         movl    -4(%ebp),%edx           
-        movl    %eax,-16020(%edx)       
+        movl    %eax,-4032(%edx)        
 .L0016:
         movl    -4(%ebp),%edx           
-        movl    -16020(%edx),%eax       
+        movl    -4032(%edx),%eax        
         pushl   %eax                    
         movl    $1000,%eax              
         popl    %ecx                    
@@ -242,21 +242,21 @@ prog$primes_1:
         movl    $1,%eax                 
         pushl   %eax                    
         movl    -4(%ebp),%edx           
-        movl    -16020(%edx),%eax       
+        movl    -4032(%edx),%eax        
         subl    $2,%eax                 
         movl    -4(%ebp),%edx           
         leal    -4028(%edx),%edx        
         popl    %ecx                    
         movl    %ecx,(%edx,%eax,4)      
         movl    -4(%ebp),%edx           
-        movl    -16020(%edx),%eax       
+        movl    -4032(%edx),%eax        
         pushl   %eax                    
         movl    $1,%eax                 
         movl    %eax, %ecx              
         popl    %eax                    
         addl    %ecx, %eax              
         movl    -4(%ebp),%edx           
-        movl    %eax,-16020(%edx)       
+        movl    %eax,-4032(%edx)        
         jmp     .L0016                  
 .L0017:
         call    proc$findprimes_2       

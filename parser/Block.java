@@ -38,15 +38,14 @@ public class Block extends PascalSyntax {
         }
 
         if (varDeclPart != null) {
-
             varDeclPart.check(this, lib);
             int counter = 0;
 
             for (VarDecl varDecl : varDeclPart.variables) {
                 addDecl(varDecl.name, varDecl);
                 if (varDecl.pType instanceof ArrayType) {
-                    counter += varDecl.type.size();
-                    varDecl.declOffset = -32 - (counter);
+                    counter += varDecl.type.size()/4;
+                    varDecl.declOffset = -32 - (counter * 4);
                 } else {
                     varDecl.declOffset = -32 - (++counter * 4);
                 }
