@@ -4,6 +4,7 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.BoolType;
 
 /**
  * Created by cyanboy on 21/10/15.
@@ -45,7 +46,7 @@ public class Negation extends Factor {
 
     @Override
     public void check(Block curScope, Library library) {
-
+        type = library.booleanType;
         factor.check(curScope, library);
         factor.type.checkType(library.booleanType, "not", this, "Factor isn't a boolean, can't be negated");
     }

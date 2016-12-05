@@ -3,6 +3,6 @@
 program Mini;
 var y : boolean;
 begin
-    y := not true
+    y := not true;
    write('x', y);
 end.
