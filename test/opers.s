@@ -1,4 +1,4 @@
-# Code file created by Pascal2016 compiler 2016-12-04 22:22:44
+# Code file created by Pascal2016 compiler 2016-12-05 01:57:42
         .globl _main                         
         .globl main                         
 _main:
@@ -24,8 +24,8 @@ proc$test_3:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
@@ -41,37 +41,34 @@ proc$test_3:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         xorl    $1, %eax                
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
         leave                           
         ret                             
 proc$testunaryboolean_2:
         enter   $32, $2                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_3             
         addl    $4,%esp                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $1,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_3             
         addl    $4,%esp                 
         leave                           
         ret                             
 proc$test_5:
         enter   $32, $3                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
@@ -95,8 +92,8 @@ proc$test_5:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
@@ -112,24 +109,23 @@ proc$test_5:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         andl    %ecx, %eax              
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
@@ -149,8 +145,8 @@ proc$test_5:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
@@ -166,57 +162,48 @@ proc$test_5:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         orl     %ecx, %eax              
         pushl   %eax                    
         call    write_bool              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
         leave                           
         ret                             
 proc$testbinaryboolean_4:
         enter   $32, $2                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $0,%eax                 
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_5             
         addl    $8,%esp                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $1,%eax                 
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_5             
         addl    $8,%esp                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $0,%eax                 
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $1,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_5             
         addl    $8,%esp                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $1,%eax                 
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $1,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_5             
         addl    $8,%esp                 
         leave                           
         ret                             
@@ -230,8 +217,8 @@ proc$test_7:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -247,16 +234,15 @@ proc$test_7:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         negl    %eax                    
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
         movl    $43,%eax                
         pushl   %eax                    
@@ -266,8 +252,8 @@ proc$test_7:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -283,15 +269,14 @@ proc$test_7:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
         leave                           
         ret                             
@@ -299,23 +284,23 @@ proc$testunarynumeric_6:
         enter   $32, $2                 
         movl    $17,%eax                
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_7             
         addl    $4,%esp                 
         movl    $11,%eax                
         negl    %eax                    
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_7             
         addl    $4,%esp                 
         movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_7             
         addl    $4,%esp                 
         leave                           
         ret                             
 proc$test_9:
         enter   $32, $3                 
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -331,8 +316,8 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -348,24 +333,23 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         addl    %ecx, %eax              
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -381,8 +365,8 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -398,24 +382,23 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         subl    %ecx, %eax              
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -431,8 +414,8 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -448,24 +431,23 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         imull   %ecx, %eax              
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         movl    $0,%eax                 
         popl    %ecx                    
@@ -474,8 +456,8 @@ proc$test_9:
         setne   %al                     
         cmpl    $0, %eax                
         je      .L0010                  
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -499,8 +481,8 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -516,11 +498,11 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         cdq                             
@@ -528,13 +510,12 @@ proc$test_9:
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -558,8 +539,8 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
@@ -575,11 +556,11 @@ proc$test_9:
         pushl   %eax                    
         call    write_char              
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    8(%edx),%eax            
         pushl   %eax                    
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    -12(%ebp),%edx          
+        movl    12(%edx),%eax           
         movl    %eax, %ecx              
         popl    %eax                    
         cdq                             
@@ -588,10 +569,9 @@ proc$test_9:
         pushl   %eax                    
         call    write_int               
         addl    $4, %esp                
-        movl    0(%ebp),%edx            
-        movl    0(%edx),%eax            
+        movl    $10,%eax                
         pushl   %eax                    
-        call    write_bool              
+        call    write_char              
         addl    $4, %esp                
 .L0010:
         leave                           
@@ -602,27 +582,27 @@ proc$testbinarynumeric_8:
         pushl   %eax                    
         movl    $17,%eax                
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $11,%eax                
         negl    %eax                    
         pushl   %eax                    
         movl    $17,%eax                
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $0,%eax                 
         pushl   %eax                    
         movl    $17,%eax                
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $17,%eax                
         pushl   %eax                    
         movl    $11,%eax                
         negl    %eax                    
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $11,%eax                
         negl    %eax                    
@@ -630,40 +610,40 @@ proc$testbinarynumeric_8:
         movl    $11,%eax                
         negl    %eax                    
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $0,%eax                 
         pushl   %eax                    
         movl    $17,%eax                
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $17,%eax                
         pushl   %eax                    
         movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $11,%eax                
         negl    %eax                    
         pushl   %eax                    
         movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         movl    $0,%eax                 
         pushl   %eax                    
         movl    $0,%eax                 
         pushl   %eax                    
-        call    proc$test               
+        call    proc$test_9             
         addl    $8,%esp                 
         leave                           
         ret                             
 prog$operatortest_1:
         enter   $32, $1                 
-        call    proc$testunaryboolean   
-        call    proc$testunarynumeric   
-        call    proc$testbinaryboolean  
-        call    proc$testbinarynumeric  
+        call    proc$testunaryboolean_2 
+        call    proc$testunarynumeric_6 
+        call    proc$testbinaryboolean_4 
+        call    proc$testbinarynumeric_8 
         leave                           
         ret                             

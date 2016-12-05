@@ -1,7 +1,6 @@
 program NameError;
 const Size =  10;
-type Range = Size;
-var I : Range;
+var I : Integer;
 begin
-   I := 42
+   Size := I
 end.
