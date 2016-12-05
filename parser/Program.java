@@ -69,10 +69,6 @@ public class Program extends PascalDecl {
     @Override
     public void genCode(CodeFile f) {
         String programLabel = String.format("prog$%s", f.getLabel(name));
-        int decls = 0;
-
-        if (progBlock.varDeclPart != null)
-            decls = 4 * progBlock.varDeclPart.variables.size();
 
         f.genInstr("", ".globl _main", "", "");
         f.genInstr("", ".globl main", "", "");
@@ -92,7 +88,7 @@ public class Program extends PascalDecl {
 
 
         f.genInstr(programLabel, "", "", "");
-        f.genInstr("", "enter", String.format("$%d, $1", 32 + decls), "");
+        f.genInstr("", "enter", String.format("$%d, $1", 32 + progBlock.varCounter * 4), "");
 
         progBlock.genCode(f);
 

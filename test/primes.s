@@ -1,4 +1,4 @@
-# Code file created by Pascal2016 compiler 2016-12-05 01:36:44
+# Code file created by Pascal2016 compiler 2016-12-05 01:53:22
         .globl _main                         
         .globl main                         
 _main:
@@ -224,7 +224,7 @@ proc$printprimes_11:
         leave                           
         ret                             
 prog$primes_1:
-        enter   $40, $1                 
+        enter   $4032, $1               
         movl    $2,%eax                 
         movl    -4(%ebp),%edx           
         movl    %eax,-4032(%edx)        

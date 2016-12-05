@@ -28,6 +28,8 @@ public class Block extends PascalSyntax {
     List<FuncDecl> funcDeclList = new ArrayList<>();
     List<ProcDecl> procDeclList = new ArrayList<>();
 
+    int varCounter = 0;
+
     public void check(Block curScope, Library lib) {
         outerScope = curScope;
         declLevel = outerScope.declLevel + 1;
@@ -39,15 +41,15 @@ public class Block extends PascalSyntax {
 
         if (varDeclPart != null) {
             varDeclPart.check(this, lib);
-            int counter = 0;
+
 
             for (VarDecl varDecl : varDeclPart.variables) {
                 addDecl(varDecl.name, varDecl);
                 if (varDecl.pType instanceof ArrayType) {
-                    counter += varDecl.type.size()/4;
-                    varDecl.declOffset = -32 - (counter * 4);
+                    varCounter += varDecl.type.size()/4;
+                    varDecl.declOffset = - 32 - (varCounter * 4);
                 } else {
-                    varDecl.declOffset = -32 - (++counter * 4);
+                    varDecl.declOffset = -32 - (++varCounter * 4);
                 }
             }
 
