@@ -42,8 +42,9 @@ public class Variable extends Factor {
         if (decl instanceof ConstDecl) {
             int value = ((ConstDecl) decl).constant.constval;
             f.genInstr("", "movl", "$" + value + ",%eax", "");
-        } else if (decl.type instanceof ArrayType ) {
+        } else if (decl.type instanceof ArrayType) {
             exp.genCode(f);
+
             int low = ((ArrayType) decl.type).loLim;
 
             if (low != 0)

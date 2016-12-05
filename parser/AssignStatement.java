@@ -51,13 +51,7 @@ public class AssignStatement extends Statement {
             f.genInstr("", "movl", -4 * (var.decl.declLevel + 1) + "(%ebp), %edx", "");
             f.genInstr("", "movl", "%eax, -32(%edx)", "");
 
-        } else if (var.decl instanceof VarDecl){
-            // movl −4b(%ebp),%edx
-            // movl %eax,o(%edx)
-
-            f.genInstr("", "movl", -4 * var.decl.declLevel + "(%ebp),%edx", "");
-            f.genInstr("", "movl", "%eax," + var.decl.declOffset + "(%edx)", "");
-        } else {
+        } else if (var.decl.type instanceof ArrayType){
             f.genInstr("", "pushl", "%eax", "");
 
             var.exp.genCode(f);
@@ -71,6 +65,9 @@ public class AssignStatement extends Statement {
             f.genInstr("", "leal", var.decl.declOffset + "(%edx),%edx", "");
             f.genInstr("", "popl", "%ecx", "");
             f.genInstr("", "movl", "%ecx,(%edx,%eax,4)", "");
+        } else {
+            f.genInstr("", "movl", -4 * var.decl.declLevel + "(%ebp),%edx", "");
+            f.genInstr("", "movl", "%eax," + var.decl.declOffset + "(%edx)", "");
         }
 
     }

@@ -4,6 +4,7 @@ import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import scanner.TokenKind;
+import types.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,14 +39,20 @@ public class Block extends PascalSyntax {
 
         if (varDeclPart != null) {
 
+            varDeclPart.check(this, lib);
             int counter = 0;
 
             for (VarDecl varDecl : varDeclPart.variables) {
                 addDecl(varDecl.name, varDecl);
-                varDecl.declOffset = -32 -(++counter * 4);
+                if (varDecl.pType instanceof ArrayType) {
+                    counter += varDecl.type.size();
+                    varDecl.declOffset = -32 - (counter);
+                } else {
+                    varDecl.declOffset = -32 - (++counter * 4);
+                }
             }
 
-            varDeclPart.check(this, lib);
+
         }
 
         funcDeclList.forEach(funcDecl -> {
